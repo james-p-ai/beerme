@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # BeerMe Ralph loop — one story per iteration, pytest gate.
 # Requires: Cursor Agent CLI (`agent`) OR run stories manually per README.
+# Portable bash 3.2+ (macOS default bash lacks mapfile).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
@@ -9,6 +10,12 @@ PROGRESS="$ROOT/progress.txt"
 MAX_ITER="${MAX_ITER:-15}"
 
 cd "$ROOT"
+
+if [[ -x "$ROOT/.venv/bin/pytest" ]]; then
+  PYTEST="$ROOT/.venv/bin/pytest"
+else
+  PYTEST="pytest"
+fi
 
 if [[ ! -f "$PRD_JSON" ]]; then
   echo "Missing $PRD_JSON"
@@ -29,25 +36,26 @@ PY
 
 iter=0
 while [[ $iter -lt $MAX_ITER ]]; do
-  mapfile -t lines < <(pick_story)
-  if [[ ${#lines[@]} -eq 0 ]]; then
+  story_output="$(pick_story)"
+  if [[ -z "$story_output" ]]; then
     echo "COMPLETE: all stories pass"
     exit 0
   fi
-  story_id="${lines[0]}"
-  acceptance="${lines[1]:-}"
+  story_id="$(printf '%s\n' "$story_output" | sed -n '1p')"
+  acceptance="$(printf '%s\n' "$story_output" | sed -n '2p')"
+  acceptance="${acceptance#pytest }"
   iter=$((iter + 1))
   echo "=== Ralph iteration $iter / $MAX_ITER — story $story_id ==="
   echo "Acceptance: $acceptance"
   echo ""
   echo "Manual mode: open a new Cursor chat and implement ONLY this story (TDD)."
-  echo "Then run: pytest $acceptance"
-  echo "Mark passes:true in scripts/ralph/prd.json and append learnings to progress.txt"
+  echo "Then run: PYTHONPATH=. $PYTEST $acceptance"
+  echo "Mark passes:true in $PRD_JSON and append learnings to progress.txt"
   echo ""
   if command -v agent >/dev/null 2>&1; then
-    prompt="Implement Ralph story $story_id only. TDD vertical slice. Run: pytest $acceptance. Update scripts/ralph/prd.json passes for this story."
+    prompt="Implement Ralph story $story_id only. TDD vertical slice. Run: PYTHONPATH=. $PYTEST $acceptance. Update prd.json passes for this story."
     agent -p "$prompt" --workspace "$ROOT" || true
-    if [[ -n "$acceptance" ]] && pytest -q "$acceptance"; then
+    if [[ -n "$acceptance" ]] && PYTHONPATH=. "$PYTEST" -q "$acceptance"; then
       python3 - "$PRD_JSON" "$story_id" << 'PY'
 import json, sys
 path, sid = sys.argv[1], sys.argv[2]
@@ -58,7 +66,7 @@ for s in data["userStories"]:
 json.dump(data, open(path, "w"), indent=2)
 print(f"Marked {sid} passes=true")
 PY
-      echo "$(date -Iseconds) $story_id done" >> "$PROGRESS"
+      echo "$(date '+%Y-%m-%dT%H:%M:%S') $story_id done" >> "$PROGRESS"
     fi
   else
     echo "No 'agent' CLI — stopping after printing story (install Cursor CLI or run manually)."
