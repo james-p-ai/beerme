@@ -4,6 +4,8 @@ Local beer taste quiz: Ollama asks flavor questions → Python builds a taste pr
 
 Built to verify the [PRD → ticket → handoff → ACR cycle SOP](docs/sop/prd-cycle-sop.full.md).
 
+**GitHub:** https://github.com/james-p-ai/beerme — [Issues](https://github.com/james-p-ai/beerme/issues) · [Kanban guide](docs/github/KANBAN.md)
+
 ## Quick start
 
 ```bash
@@ -31,6 +33,17 @@ Autonomous small-task loop for AFK-friendly work (e.g. `taste_profile` TDD).
 | [scripts/ralph/prd.json](scripts/ralph/prd.json) | Stories with `passes` flag |
 | [scripts/ralph/ralph.sh](scripts/ralph/ralph.sh) | Iteration driver + pytest gate |
 | [progress.txt](progress.txt) | Append-only learnings |
+
+### Ralph batches on GitHub
+
+| Batch | Issue | prd file |
+|-------|-------|----------|
+| taste_profile (done) | [#6](https://github.com/james-p-ai/beerme/issues/6) | `scripts/ralph/prd.json` |
+| Ollama JSON (open) | [#14](https://github.com/james-p-ai/beerme/issues/14) | `scripts/ralph/prd-ollama.json` |
+
+```bash
+PRD_JSON=scripts/ralph/prd-ollama.json ./scripts/ralph/ralph.sh
+```
 
 ### How Ralph is set up
 

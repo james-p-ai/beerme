@@ -1,32 +1,16 @@
-# GitHub setup (run locally)
+# GitHub setup
 
-Repo is committed on `main`. Publish and seed Kanban:
+**Repo published:** https://github.com/james-p-ai/beerme
 
-```bash
-cd ~/Projects/beerme
-gh repo create beerme --public --source=. --remote=origin --push
-```
+**23 issues** created with `priority:P0–P3`, `size:S/M/L`, phase milestones, and `ralph-ready` labels.
 
-## Labels
+Full board guide: [docs/github/KANBAN.md](github/KANBAN.md)
 
-```bash
-for l in needs-triage needs-info ready-for-agent ready-for-human wontfix bug enhancement \
-  prd:v1.0.0 prd:v1.1.0 prd:v1.2.0 prd:v1.3.0 \
-  phase-1-foundation phase-2-taste-engine phase-3-catalog-recs ralph size:S size:M size:L blocked; do
-  gh label create "$l" --force 2>/dev/null || true
-done
-```
-
-## Milestones + issues (Phase 1 example)
+## Finish the Kanban project (needs project scope)
 
 ```bash
-gh issue create --title "PRD Epic: BeerMe" --label "enhancement,prd:v1.3.0" \
-  --body "Canonical PRD: docs/prd/PRD.md"
-
-gh issue create --title "P1-T3 Ollama client" --label "enhancement,phase-1-foundation,ready-for-agent,size:M" \
-  --body "See docs/phases/phase-1-foundation/kickoff.md"
+gh auth refresh -s read:project,project
+./scripts/github/bootstrap-kanban.sh
 ```
 
-Create a **Projects** board: Backlog → Ready → In Progress → Verify → Done.
-
-Issue template: `.github/ISSUE_TEMPLATE/ticket.md`
+Or create a board manually at https://github.com/users/james-p-ai/projects and follow KANBAN.md.

@@ -4,7 +4,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-PRD_JSON="$ROOT/scripts/ralph/prd.json"
+PRD_JSON="${PRD_JSON:-$ROOT/scripts/ralph/prd.json}"
 PROGRESS="$ROOT/progress.txt"
 MAX_ITER="${MAX_ITER:-15}"
 
