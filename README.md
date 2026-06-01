@@ -12,9 +12,10 @@ Built to verify the [PRD → ticket → handoff → ACR cycle SOP](docs/sop/prd-
 cd ~/Projects/beerme
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-ollama pull llama3.2:3b
-streamlit run app/main.py
+./run.sh
 ```
+
+Or manually: `source .venv/bin/activate && PYTHONPATH=. streamlit run app/main.py`
 
 Optional env: `OLLAMA_HOST`, `OLLAMA_MODEL` (default `llama3.2:3b`).
 
@@ -64,6 +65,7 @@ See [docs/workflow/kanban.md](docs/workflow/kanban.md).
 | Phase 2 handoff | [docs/phases/phase-2-taste-engine/handoff-to-acr.md](docs/phases/phase-2-taste-engine/handoff-to-acr.md) |
 | Phase 3 handoff | [docs/phases/phase-3-catalog-recs/handoff-to-acr.md](docs/phases/phase-3-catalog-recs/handoff-to-acr.md) |
 | Phase 4 kickoff | [docs/phases/phase-4-polish/kickoff.md](docs/phases/phase-4-polish/kickoff.md) |
+| Phase 4 handoff | [docs/phases/phase-4-polish/handoff-to-acr.md](docs/phases/phase-4-polish/handoff-to-acr.md) |
 | SOP addendum | [docs/sop/verification-addendum.md](docs/sop/verification-addendum.md) |
 | Full SOP copy | [docs/sop/prd-cycle-sop.full.md](docs/sop/prd-cycle-sop.full.md) |
 | Skills map | [docs/workflow/skills-map.md](docs/workflow/skills-map.md) |

@@ -6,12 +6,12 @@
 
 | Section | Milestone | Labels | Status |
 |---------|-----------|--------|--------|
-| Epic | — | `priority:P0`, `prd:v1.5.0` | [#1](https://github.com/james-p-ai/beerme/issues/1) |
+| Epic | — | `priority:P0`, `prd:v1.6.0` | [#1](https://github.com/james-p-ai/beerme/issues/1) |
 | Phase 1 | Phase 1 — Foundation | `size:S/M`, `phase-1-foundation` | #2–#5 closed (shipped) |
 | Phase 2 + Ralph (confidence) | Phase 2 — Taste engine | `ralph-ready`, `ralph-batch` | #6–#13 closed |
 | Ralph: Ollama JSON | Phase 4 — Polish | `ralph-ready` | [#14](https://github.com/james-p-ai/beerme/issues/14) closed |
 | Phase 3 | Phase 3 — Catalog & recs | `phase-3-catalog-recs` | [#21](https://github.com/james-p-ai/beerme/issues/21) closed |
-| **Polish (active)** | Phase 4 — Polish | `priority:P2/P3`, `ready-for-human` | [#22](https://github.com/james-p-ai/beerme/issues/22), [#23](https://github.com/james-p-ai/beerme/issues/23) in **Ready** |
+| **Polish (active)** | Phase 4 — Polish | `priority:P2/P3`, `ready-for-human` | [#22](https://github.com/james-p-ai/beerme/issues/22), [#23](https://github.com/james-p-ai/beerme/issues/23) closed — demo-ready |
 
 Filter open Ralph work: https://github.com/james-p-ai/beerme/issues?q=is%3Aopen+label%3Aralph-ready
 

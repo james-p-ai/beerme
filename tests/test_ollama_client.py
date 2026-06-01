@@ -16,6 +16,11 @@ def test_parse_json_embedded_in_text():
     assert parse_json_response(raw)["delta"]["bitterness"] == 0.5
 
 
+def test_parse_json_markdown_fence():
+    raw = '```json\n{"question": "Do you like hops?"}\n```'
+    assert parse_json_response(raw)["question"] == "Do you like hops?"
+
+
 def test_parse_invalid_raises():
     with pytest.raises(Exception):
         parse_json_response("not json at all")

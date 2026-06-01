@@ -40,10 +40,14 @@ class TasteProfile:
             if axis not in TASTE_AXES:
                 continue
             if isinstance(payload, dict):
-                if "value" in payload:
-                    self.values[axis] = _clamp(float(payload["value"]))
-                if "confidence" in payload:
-                    self.axis_confidence[axis] = _clamp(float(payload["confidence"]))
+                if "value" in payload and payload["value"] is not None:
+                    num = _coerce_float(payload["value"])
+                    if num is not None:
+                        self.values[axis] = _clamp(num)
+                if "confidence" in payload and payload["confidence"] is not None:
+                    num = _coerce_float(payload["confidence"])
+                    if num is not None:
+                        self.axis_confidence[axis] = _clamp(num)
             elif isinstance(payload, (int, float)):
                 self.values[axis] = _clamp(float(payload))
                 self.axis_confidence[axis] = max(self.axis_confidence[axis], 0.5)
@@ -72,6 +76,67 @@ class TasteProfile:
         )
         return self.turn_count >= MIN_TURNS and strong >= MIN_AXES
 
+    def axes_by_low_confidence(self) -> list[str]:
+        return sorted(TASTE_AXES, key=lambda a: self.axis_confidence.get(a, 0))
+
+    def asked_axes(self, history: list[dict[str, Any]]) -> set[str]:
+        """Axes already covered this session — never ask again."""
+        from app.prompts import QUESTION_TEXT_TO_AXIS
+
+        asked: set[str] = set()
+        for turn in history:
+            asked.update(turn.get("targets_axes", []))
+            axis = QUESTION_TEXT_TO_AXIS.get(turn.get("question", "").strip())
+            if axis:
+                asked.add(axis)
+        return asked
+
+    def blocked_axes(
+        self,
+        history: list[dict[str, Any]],
+        *,
+        refining: bool = False,
+    ) -> set[str]:
+        asked = self.asked_axes(history)
+        if not refining:
+            return asked
+        return {
+            axis
+            for axis in asked
+            if self.axis_confidence.get(axis, 0) >= AXIS_CONFIDENCE_THRESHOLD
+        }
+
+    def preferred_next_axis(self, blocked: set[str]) -> str | None:
+        for axis in self.axes_by_low_confidence():
+            if axis not in blocked:
+                return axis
+        return None
+
+    def apply_bitterness_scale(self, answer: str) -> bool:
+        if answer == "I don't know":
+            self.apply_delta({"bitterness": {"confidence": 0.2}})
+            return True
+        try:
+            level = int(answer)
+        except ValueError:
+            return False
+        if 1 <= level <= 10:
+            self.apply_delta({"bitterness": {"value": level / 10, "confidence": 0.85}})
+            return True
+        return False
+
+    def apply_bank_answer(self, axis: str, answer: str) -> bool:
+        """Map a banked multiple-choice answer to profile delta without LLM."""
+        if axis == "bitterness":
+            return self.apply_bitterness_scale(answer)
+        from app.prompts import choice_delta_for_answer
+
+        delta = choice_delta_for_answer(axis, answer)
+        if delta is None:
+            return False
+        self.apply_delta({axis: delta})
+        return True
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "values": dict(self.values),
@@ -92,3 +157,12 @@ class TasteProfile:
 
 def _clamp(x: float) -> float:
     return max(0.0, min(1.0, x))
+
+
+def _coerce_float(value: Any) -> float | None:
+    if value is None:
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None

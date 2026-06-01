@@ -5,14 +5,22 @@
 
 | Field                  | Value                                                                                |
 | ---------------------- | ------------------------------------------------------------------------------------ |
-| **Version**            | v1.5.0                                                                               |
+| **Version**            | v1.6.0                                                                               |
 | **Date**               | 2026-06-01                                                                           |
 | **Author**             | James Mair                                                                           |
-| **Summary of changes** | Phase 3 complete incl. optional LLM blurbs; Phase 4 polish active. See changelog. |
-| **Active phase(s)**    | phase-4-polish (active); phase-3-catalog-recs (complete)                             |
+| **Summary of changes** | Phase 4 complete: QA, MD export, question bank. Demo-ready. See changelog.          |
+| **Active phase(s)**    | phase-4-polish (complete); all phases shipped                                        |
 
 
 ## Changelog
+
+### v1.6.0 (2026-06-01) — ACR after Phase 4 polish
+
+- Closed [#22](https://github.com/james-p-ai/beerme/issues/22) P4-T1: expanded smoke script; fixed ask-more bounce via refining mode.
+- Closed [#23](https://github.com/james-p-ai/beerme/issues/23) P4-T2: MD export download on results (`app/export_md.py`).
+- Question bank: deterministic axis questions from `QUESTION_BANK`; Ollama used for preference extract (fallback) and optional blurbs only.
+- `model_available()` check; `./run.sh` demo launcher.
+- Phase 4 handoff: `docs/phases/phase-4-polish/handoff-to-acr.md`.
 
 ### v1.5.0 (2026-06-01) — ACR after Phase 3 completion (P3-T4)
 
@@ -58,7 +66,7 @@ Beer drinkers struggle to pick styles and specific beers that match nuanced tast
 
 ## Solution
 
-BeerMe runs locally: asks short flavor questions powered by Ollama, builds a structured taste profile, and when session confidence is high enough shows a **hierarchical** list of styles and catalog beers to try—never inventing beers outside the static catalog.
+BeerMe runs locally: asks short flavor questions from a deterministic question bank, builds a structured taste profile, and when session confidence is high enough shows a **hierarchical** list of styles and catalog beers to try—never inventing beers outside the static catalog. Ollama powers optional preference extraction fallback and tasting-note blurbs.
 
 ## User Stories
 
@@ -77,23 +85,25 @@ BeerMe runs locally: asks short flavor questions powered by Ollama, builds a str
 - **Taste axes (10):** bitterness, sweetness, body, roast, fruit, sour, hoppy, malt, abv_preference, crispness.
 - **Profile merge:** LLM returns JSON deltas; Python clamps 0–1 and updates per-axis confidence.
 - **Session confidence:** `min_axes=6` with per-axis confidence ≥ 0.6, `min_turns=4`.
-- **Ollama contract:** `next_question`, `extract_preferences`, and `blurbs` JSON schemas in `app/prompts.py`; `chat_json` retries once on parse failure.
+- **Question bank:** One question per taste axis from `QUESTION_BANK` in `app/prompts.py`; targets lowest-confidence unasked axis; banked multiple-choice answers map to profile deltas without LLM. Refining mode (after "Ask more questions") re-opens axes below confidence threshold.
+- **Ollama contract:** `extract_preferences` and `blurbs` JSON schemas in `app/prompts.py`; `chat_json` retries once on parse failure. Extract used when banked answer mapping fails.
 - **LLM blurbs (optional):** Sidebar toggle on results; one batch call with catalog beer metadata + profile; response keys validated ⊆ requested catalog IDs; recommendations unchanged (deterministic scoring).
+- **MD export:** Results screen download button; `format_recommendations_md()` renders profile table + recommendation tree + optional blurbs.
 - **Recommendations:** Dot-product style scoring on tree; top 3 branches expanded to beers.
-- **Modules:** `taste_profile`, `recommender`, `ollama_client`, `main` (Streamlit).
+- **Modules:** `taste_profile`, `recommender`, `ollama_client`, `export_md`, `main` (Streamlit).
 
 ## Testing Decisions
 
-- Test **public behavior** via `taste_profile` and `recommender` APIs only.
+- Test **public behavior** via `taste_profile`, `recommender`, and `export_md` APIs only.
 - Fixtures in `tests/fixtures/` for catalog; no live Ollama in unit tests.
-- `ollama_client`: four unit tests in `tests/test_ollama_client.py` — plain JSON, embedded JSON, invalid raises, `chat_json` retry with mocked `chat`; no live server.
-- `taste_profile` / `recommender`: public API + fixtures only.
-- Streamlit + live Ollama (quiz, blurbs): manual only — `scripts/qa/beerme-smoke.sh` or qa skill ([#22](https://github.com/james-p-ai/beerme/issues/22)).
+- `ollama_client`: unit tests in `tests/test_ollama_client.py` — plain JSON, embedded JSON, markdown fence, invalid raises, `chat_json` retry; no live server.
+- `taste_profile` / `recommender` / `export_md`: public API + fixtures only.
+- Streamlit + live Ollama (blurbs, full quiz path): manual only — `scripts/qa/beerme-smoke.sh`.
 - Ralph AFK stories: acceptance = single pytest node from `scripts/ralph/prd-<batch>.json`; human Verify gate on Kanban before Done.
 
 ## Out of Scope
 
-- Accounts, payments, cloud deploy, live Untappp/API beer data, training custom models.
+- Accounts, payments, cloud deploy, live Untappp/API beer data, training custom models, PDF export.
 
 ## Further Notes
 
@@ -101,6 +111,6 @@ BeerMe runs locally: asks short flavor questions powered by Ollama, builds a str
 - GitHub PRD epic mirrors this doc; `docs/prd/PRD.md` is canonical for versioning.
 - Kanban + issue bootstrap: docs/github/KANBAN.md, ./scripts/github/bootstrap-kanban.sh.
 - Ralph loop: docs/workflow/ralph-playbook.md; run PRD_JSON=scripts/ralph/prd-ollama.json ./scripts/ralph/ralph.sh.
-- Epic label on [#1](https://github.com/james-p-ai/beerme/issues/1): `prd:v1.5.0`.
+- Epic label on [#1](https://github.com/james-p-ai/beerme/issues/1): `prd:v1.6.0`.
 - ready-for-human = HITL (product, live LLM, UI judgment); ralph-ready = AFK pytest stories.
 

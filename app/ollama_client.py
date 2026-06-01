@@ -36,6 +36,19 @@ def list_models(timeout: float = 5.0) -> list[str]:
     return [m.get("name", "") for m in data.get("models", [])]
 
 
+def model_available(timeout: float = 5.0) -> bool:
+    """True when the configured model is installed locally."""
+    if not is_available(timeout):
+        return False
+    want = ollama_model()
+    models = list_models(timeout)
+    if want in models:
+        return True
+    # tolerate tag variants, e.g. llama3.2:3b vs llama3.2:3b-q4_0
+    base = want.split(":")[0]
+    return any(m == want or m.startswith(f"{base}:") for m in models)
+
+
 def chat(
     messages: list[dict[str, str]],
     *,
@@ -56,6 +69,9 @@ def chat(
 
 def parse_json_response(text: str) -> dict[str, Any]:
     text = text.strip()
+    if text.startswith("```"):
+        text = re.sub(r"^```(?:json)?\s*", "", text)
+        text = re.sub(r"\s*```$", "", text).strip()
     try:
         return json.loads(text)
     except json.JSONDecodeError:
@@ -76,10 +92,27 @@ def chat_json(
         try:
             raw = chat(messages, model=model)
             return parse_json_response(raw)
-        except (json.JSONDecodeError, httpx.HTTPError, KeyError) as e:
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code == 404:
+                want = model or ollama_model()
+                raise RuntimeError(
+                    f"Ollama model {want!r} not found. Run: ollama pull {want}"
+                ) from e
+            last_err = e
+            if attempt >= retries:
+                raise RuntimeError(f"Ollama request failed: {e}") from e
+        except json.JSONDecodeError as e:
             last_err = e
             if attempt < retries:
                 messages = messages + [
                     {"role": "user", "content": "Your last reply was invalid JSON. Reply with JSON only."}
                 ]
-    raise RuntimeError(f"Ollama JSON parse failed after {retries + 1} attempts") from last_err
+            else:
+                raise RuntimeError(
+                    f"Ollama JSON parse failed after {retries + 1} attempts"
+                ) from e
+        except (httpx.HTTPError, KeyError) as e:
+            last_err = e
+            if attempt >= retries:
+                raise RuntimeError(f"Ollama request failed: {e}") from e
+    raise RuntimeError(f"Ollama request failed: {last_err}") from last_err

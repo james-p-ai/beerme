@@ -25,7 +25,7 @@ PRD v1.4.0 → **v1.5.0**
 
 ```bash
 ollama pull llama3.2:3b
-streamlit run app/main.py
+PYTHONPATH=. streamlit run app/main.py
 ```
 
 Blurbs require Ollama connected and sidebar toggle enabled on the results screen.
