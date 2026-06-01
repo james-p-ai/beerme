@@ -1,17 +1,20 @@
 # BeerMe Kanban on GitHub
 
-**Repo:** https://github.com/james-p-ai/beerme
+**Repo:** https://github.com/james-p-ai/beerme  
+**Board:** [BeerMe Kanban](https://github.com/users/james-p-ai/projects/2)
 
 ## Issues (tickets)
 
 | Section | Milestone | Labels | Status |
 |---------|-----------|--------|--------|
-| Epic | — | `priority:P0`, `prd:v1.6.0` | [#1](https://github.com/james-p-ai/beerme/issues/1) |
+| Epic | — | `priority:P0`, `prd:v1.6.0` | [#1](https://github.com/james-p-ai/beerme/issues/1) closed — **Done** on board |
 | Phase 1 | Phase 1 — Foundation | `size:S/M`, `phase-1-foundation` | #2–#5 closed (shipped) |
 | Phase 2 + Ralph (confidence) | Phase 2 — Taste engine | `ralph-ready`, `ralph-batch` | #6–#13 closed |
 | Ralph: Ollama JSON | Phase 4 — Polish | `ralph-ready` | [#14](https://github.com/james-p-ai/beerme/issues/14) closed |
 | Phase 3 | Phase 3 — Catalog & recs | `phase-3-catalog-recs` | [#21](https://github.com/james-p-ai/beerme/issues/21) closed |
-| **Polish (active)** | Phase 4 — Polish | `priority:P2/P3`, `ready-for-human` | [#22](https://github.com/james-p-ai/beerme/issues/22), [#23](https://github.com/james-p-ai/beerme/issues/23) closed — demo-ready |
+| Phase 4 polish | Phase 4 — Polish | `phase-4-polish` | [#22](https://github.com/james-p-ai/beerme/issues/22), [#23](https://github.com/james-p-ai/beerme/issues/23) closed — demo-ready |
+
+**Product status:** PRD v1.6.0 complete. No open phase tickets. Remaining human gate: `bash scripts/qa/beerme-smoke.sh`.
 
 Filter open Ralph work: https://github.com/james-p-ai/beerme/issues?q=is%3Aopen+label%3Aralph-ready
 
@@ -27,7 +30,7 @@ On each issue via labels:
 | Batch | Parent issue | `prd.json` | Run |
 |-------|--------------|------------|-----|
 | taste_profile (done) | #6 | `scripts/ralph/prd.json` | stories `passes: true` |
-| Ollama JSON (practice) | #14 | `scripts/ralph/prd-ollama.json` | `PRD_JSON=scripts/ralph/prd-ollama.json ./scripts/ralph/ralph.sh` |
+| Ollama JSON (done) | #14 | `scripts/ralph/prd-ollama.json` | stories `passes: true` |
 
 Workflow: pick open `ralph-ready` issue → implement one story → `pytest` → set `passes: true` → parent to **Verify** on board → you approve → **Done**.
 
@@ -52,8 +55,7 @@ Or manually:
 3. Columns: **Backlog** | **Ready** | **In Progress** | **Verify** | **Done**
 4. Add custom fields **Priority** (P0–P3) and **Size** (S/M/L) if desired
 5. **Add all issues** from the repo
-6. Drag closed Phase 1–3 tickets to **Done**
-7. Put [#22](https://github.com/james-p-ai/beerme/issues/22) and [#23](https://github.com/james-p-ai/beerme/issues/23) in **Ready** for Phase 4 polish
+6. Drag closed tickets to **Done** (including epic [#1](https://github.com/james-p-ai/beerme/issues/1) when PRD phase completes)
 
 ## Re-run issue bootstrap
 
