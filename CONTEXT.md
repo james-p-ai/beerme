@@ -2,11 +2,11 @@
 
 | Term | Meaning |
 |------|---------|
-| **Taste profile** | User preference vector over fixed taste axes (0–1 per axis). |
-| **Taste axis** | One dimension of beer character (e.g. bitterness, sweetness, body). |
-| **Axis confidence** | How sure we are about one axis value (0–1); distinct from overall session confidence. |
-| **Session confidence** | Aggregate score: enough axes known to recommend (computed in Python, not by LLM). |
-| **Catalog** | Static `beers.json` + `style_tree.json`; only source for beer names in recommendations. |
-| **Style node** | Entry in the hierarchy (e.g. IPA → West Coast IPA). |
-| **Recommendation tree** | Ranked hierarchy of styles and leaf beers from catalog scoring. |
-| **Question turn** | One LLM-generated question + user answer updating the profile. |
+| **Taste profile** | User pref vector over taste axes (0–1 per axis). |
+| **Taste axis** | One beer character dimension (bitterness, sweetness, body, etc.). |
+| **Axis confidence** | Surety on one axis (0–1); not session confidence. |
+| **Session confidence** | Aggregate: enough axes known to recommend (Python, not LLM). |
+| **Catalog** | Static `beers.json` + `style_tree.json`; only beer name source in recs. |
+| **Style node** | Hierarchy entry (e.g. IPA → West Coast IPA). |
+| **Recommendation tree** | Ranked style + leaf beer hierarchy from catalog scoring. |
+| **Question turn** | One banked quiz question + answer updates profile. |

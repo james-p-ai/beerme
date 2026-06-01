@@ -9,7 +9,7 @@ Built to verify the [PRD → ticket → handoff → ACR cycle SOP](docs/sop/prd-
 ## Quick start
 
 ```bash
-cd ~/Projects/beerme
+cd ~/work/beerme
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ./run.sh
