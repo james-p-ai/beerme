@@ -1,0 +1,30 @@
+{
+  "branchName": "ralph/p2-t1-confidence",
+  "maxIterations": 15,
+  "userStories": [
+    {
+      "id": "conf-01",
+      "title": "Empty profile confidence_score is below ready threshold",
+      "passes": true,
+      "acceptance": "pytest tests/test_confidence.py::test_empty_profile_low_confidence"
+    },
+    {
+      "id": "conf-02",
+      "title": "Profile is ready after min turns and axes",
+      "passes": true,
+      "acceptance": "pytest tests/test_confidence.py::test_ready_after_enough_axes_and_turns"
+    },
+    {
+      "id": "conf-03",
+      "title": "Delta values clamp to 0-1",
+      "passes": true,
+      "acceptance": "pytest tests/test_confidence.py::test_apply_delta_clamps_values"
+    },
+    {
+      "id": "conf-04",
+      "title": "Profile roundtrips through dict",
+      "passes": true,
+      "acceptance": "pytest tests/test_confidence.py::test_roundtrip_dict"
+    }
+  ]
+}

@@ -1,0 +1,682 @@
+[
+  {
+    "id": "ipa-01",
+    "name": "Pliny the Elder",
+    "brewery": "Russian River",
+    "profile": {
+      "bitterness": 0.9,
+      "hoppy": 0.95,
+      "sweetness": 0.2,
+      "body": 0.5,
+      "malt": 0.3,
+      "fruit": 0.3,
+      "sour": 0.1,
+      "roast": 0.1,
+      "abv_preference": 0.65,
+      "crispness": 0.6
+    }
+  },
+  {
+    "id": "ipa-02",
+    "name": "Sculpin IPA",
+    "brewery": "Ballast Point",
+    "profile": {
+      "bitterness": 0.9,
+      "hoppy": 0.95,
+      "sweetness": 0.2,
+      "body": 0.5,
+      "malt": 0.3,
+      "fruit": 0.3,
+      "sour": 0.1,
+      "roast": 0.1,
+      "abv_preference": 0.65,
+      "crispness": 0.6
+    }
+  },
+  {
+    "id": "ipa-03",
+    "name": "Stone IPA",
+    "brewery": "Stone",
+    "profile": {
+      "bitterness": 0.9,
+      "hoppy": 0.95,
+      "sweetness": 0.2,
+      "body": 0.5,
+      "malt": 0.3,
+      "fruit": 0.3,
+      "sour": 0.1,
+      "roast": 0.1,
+      "abv_preference": 0.65,
+      "crispness": 0.6
+    }
+  },
+  {
+    "id": "ipa-04",
+    "name": "Lagunitas IPA",
+    "brewery": "Lagunitas",
+    "profile": {
+      "bitterness": 0.9,
+      "hoppy": 0.95,
+      "sweetness": 0.2,
+      "body": 0.5,
+      "malt": 0.3,
+      "fruit": 0.3,
+      "sour": 0.1,
+      "roast": 0.1,
+      "abv_preference": 0.65,
+      "crispness": 0.6
+    }
+  },
+  {
+    "id": "ne-01",
+    "name": "Heady Topper",
+    "brewery": "The Alchemist",
+    "profile": {
+      "bitterness": 0.4,
+      "hoppy": 0.85,
+      "sweetness": 0.5,
+      "body": 0.45,
+      "malt": 0.35,
+      "fruit": 0.7,
+      "sour": 0.15,
+      "roast": 0.1,
+      "abv_preference": 0.55,
+      "crispness": 0.55
+    }
+  },
+  {
+    "id": "ne-02",
+    "name": "Julius",
+    "brewery": "Tree House",
+    "profile": {
+      "bitterness": 0.4,
+      "hoppy": 0.85,
+      "sweetness": 0.5,
+      "body": 0.45,
+      "malt": 0.35,
+      "fruit": 0.7,
+      "sour": 0.15,
+      "roast": 0.1,
+      "abv_preference": 0.55,
+      "crispness": 0.55
+    }
+  },
+  {
+    "id": "ne-03",
+    "name": "Sip of Sunshine",
+    "brewery": "Lawson's",
+    "profile": {
+      "bitterness": 0.4,
+      "hoppy": 0.85,
+      "sweetness": 0.5,
+      "body": 0.45,
+      "malt": 0.35,
+      "fruit": 0.7,
+      "sour": 0.15,
+      "roast": 0.1,
+      "abv_preference": 0.55,
+      "crispness": 0.55
+    }
+  },
+  {
+    "id": "ne-04",
+    "name": "Haze",
+    "brewery": "Tree House",
+    "profile": {
+      "bitterness": 0.4,
+      "hoppy": 0.85,
+      "sweetness": 0.5,
+      "body": 0.45,
+      "malt": 0.35,
+      "fruit": 0.7,
+      "sour": 0.15,
+      "roast": 0.1,
+      "abv_preference": 0.55,
+      "crispness": 0.55
+    }
+  },
+  {
+    "id": "st-01",
+    "name": "Guinness Draught",
+    "brewery": "Guinness",
+    "profile": {
+      "bitterness": 0.5,
+      "hoppy": 0.3,
+      "sweetness": 0.35,
+      "body": 0.9,
+      "malt": 0.7,
+      "fruit": 0.2,
+      "sour": 0.1,
+      "roast": 0.85,
+      "abv_preference": 0.6,
+      "crispness": 0.2
+    }
+  },
+  {
+    "id": "st-02",
+    "name": "Breakfast Stout",
+    "brewery": "Founders",
+    "profile": {
+      "bitterness": 0.5,
+      "hoppy": 0.3,
+      "sweetness": 0.35,
+      "body": 0.9,
+      "malt": 0.7,
+      "fruit": 0.2,
+      "sour": 0.1,
+      "roast": 0.85,
+      "abv_preference": 0.6,
+      "crispness": 0.2
+    }
+  },
+  {
+    "id": "st-03",
+    "name": "Prairie Artisan Ale",
+    "brewery": "Prairie",
+    "profile": {
+      "bitterness": 0.5,
+      "hoppy": 0.3,
+      "sweetness": 0.35,
+      "body": 0.9,
+      "malt": 0.7,
+      "fruit": 0.2,
+      "sour": 0.1,
+      "roast": 0.85,
+      "abv_preference": 0.6,
+      "crispness": 0.2
+    }
+  },
+  {
+    "id": "st-04",
+    "name": "Left Hand Milk Stout",
+    "brewery": "Left Hand",
+    "profile": {
+      "bitterness": 0.5,
+      "hoppy": 0.3,
+      "sweetness": 0.35,
+      "body": 0.9,
+      "malt": 0.7,
+      "fruit": 0.2,
+      "sour": 0.1,
+      "roast": 0.85,
+      "abv_preference": 0.6,
+      "crispness": 0.2
+    }
+  },
+  {
+    "id": "lg-01",
+    "name": "Pilsner Urquell",
+    "brewery": "Pilsner Urquell",
+    "profile": {
+      "bitterness": 0.5,
+      "hoppy": 0.45,
+      "sweetness": 0.35,
+      "body": 0.3,
+      "malt": 0.45,
+      "fruit": 0.15,
+      "sour": 0.1,
+      "roast": 0.1,
+      "abv_preference": 0.45,
+      "crispness": 0.9
+    }
+  },
+  {
+    "id": "lg-02",
+    "name": "Weihenstephaner Original",
+    "brewery": "Weihenstephan",
+    "profile": {
+      "bitterness": 0.35,
+      "hoppy": 0.25,
+      "sweetness": 0.4,
+      "body": 0.35,
+      "malt": 0.5,
+      "fruit": 0.2,
+      "sour": 0.1,
+      "roast": 0.15,
+      "abv_preference": 0.45,
+      "crispness": 0.85
+    }
+  },
+  {
+    "id": "lg-03",
+    "name": "Modelo Especial",
+    "brewery": "Grupo Modelo",
+    "profile": {
+      "bitterness": 0.35,
+      "hoppy": 0.25,
+      "sweetness": 0.4,
+      "body": 0.35,
+      "malt": 0.5,
+      "fruit": 0.2,
+      "sour": 0.1,
+      "roast": 0.15,
+      "abv_preference": 0.45,
+      "crispness": 0.85
+    }
+  },
+  {
+    "id": "lg-04",
+    "name": "Yuengling Lager",
+    "brewery": "Yuengling",
+    "profile": {
+      "bitterness": 0.35,
+      "hoppy": 0.25,
+      "sweetness": 0.4,
+      "body": 0.35,
+      "malt": 0.5,
+      "fruit": 0.2,
+      "sour": 0.1,
+      "roast": 0.15,
+      "abv_preference": 0.45,
+      "crispness": 0.85
+    }
+  },
+  {
+    "id": "wh-01",
+    "name": "Hoegaarden",
+    "brewery": "Hoegaarden",
+    "profile": {
+      "bitterness": 0.25,
+      "hoppy": 0.2,
+      "sweetness": 0.55,
+      "body": 0.5,
+      "malt": 0.55,
+      "fruit": 0.5,
+      "sour": 0.2,
+      "roast": 0.1,
+      "abv_preference": 0.45,
+      "crispness": 0.5
+    }
+  },
+  {
+    "id": "wh-02",
+    "name": "Blue Moon",
+    "brewery": "Blue Moon",
+    "profile": {
+      "bitterness": 0.25,
+      "hoppy": 0.2,
+      "sweetness": 0.55,
+      "body": 0.5,
+      "malt": 0.55,
+      "fruit": 0.5,
+      "sour": 0.2,
+      "roast": 0.1,
+      "abv_preference": 0.45,
+      "crispness": 0.5
+    }
+  },
+  {
+    "id": "wh-03",
+    "name": "Allagash White",
+    "brewery": "Allagash",
+    "profile": {
+      "bitterness": 0.25,
+      "hoppy": 0.2,
+      "sweetness": 0.55,
+      "body": 0.5,
+      "malt": 0.55,
+      "fruit": 0.5,
+      "sour": 0.2,
+      "roast": 0.1,
+      "abv_preference": 0.45,
+      "crispness": 0.5
+    }
+  },
+  {
+    "id": "wh-04",
+    "name": "Hefeweizen",
+    "brewery": "Paulaner",
+    "profile": {
+      "bitterness": 0.25,
+      "hoppy": 0.2,
+      "sweetness": 0.55,
+      "body": 0.5,
+      "malt": 0.55,
+      "fruit": 0.5,
+      "sour": 0.2,
+      "roast": 0.1,
+      "abv_preference": 0.45,
+      "crispness": 0.5
+    }
+  },
+  {
+    "id": "so-01",
+    "name": "La Folie",
+    "brewery": "New Belgium",
+    "profile": {
+      "bitterness": 0.2,
+      "hoppy": 0.15,
+      "sweetness": 0.5,
+      "body": 0.4,
+      "malt": 0.3,
+      "fruit": 0.6,
+      "sour": 0.9,
+      "roast": 0.05,
+      "abv_preference": 0.4,
+      "crispness": 0.5
+    }
+  },
+  {
+    "id": "so-02",
+    "name": "Supplication",
+    "brewery": "Russian River",
+    "profile": {
+      "bitterness": 0.2,
+      "hoppy": 0.15,
+      "sweetness": 0.5,
+      "body": 0.4,
+      "malt": 0.3,
+      "fruit": 0.6,
+      "sour": 0.9,
+      "roast": 0.05,
+      "abv_preference": 0.4,
+      "crispness": 0.5
+    }
+  },
+  {
+    "id": "so-03",
+    "name": "Oude Geuze",
+    "brewery": "Lindemans",
+    "profile": {
+      "bitterness": 0.2,
+      "hoppy": 0.15,
+      "sweetness": 0.5,
+      "body": 0.4,
+      "malt": 0.3,
+      "fruit": 0.6,
+      "sour": 0.9,
+      "roast": 0.05,
+      "abv_preference": 0.4,
+      "crispness": 0.5
+    }
+  },
+  {
+    "id": "so-04",
+    "name": "Berliner Weisse",
+    "brewery": "Brewery X",
+    "profile": {
+      "bitterness": 0.2,
+      "hoppy": 0.15,
+      "sweetness": 0.5,
+      "body": 0.4,
+      "malt": 0.3,
+      "fruit": 0.6,
+      "sour": 0.9,
+      "roast": 0.05,
+      "abv_preference": 0.4,
+      "crispness": 0.5
+    }
+  },
+  {
+    "id": "am-01",
+    "name": "Fat Tire",
+    "brewery": "New Belgium",
+    "profile": {
+      "bitterness": 0.45,
+      "hoppy": 0.4,
+      "sweetness": 0.5,
+      "body": 0.55,
+      "malt": 0.65,
+      "fruit": 0.25,
+      "sour": 0.1,
+      "roast": 0.35,
+      "abv_preference": 0.5,
+      "crispness": 0.45
+    }
+  },
+  {
+    "id": "am-02",
+    "name": "Bell's Amber",
+    "brewery": "Bell's",
+    "profile": {
+      "bitterness": 0.45,
+      "hoppy": 0.4,
+      "sweetness": 0.5,
+      "body": 0.55,
+      "malt": 0.65,
+      "fruit": 0.25,
+      "sour": 0.1,
+      "roast": 0.35,
+      "abv_preference": 0.5,
+      "crispness": 0.45
+    }
+  },
+  {
+    "id": "am-03",
+    "name": "Killian's",
+    "brewery": "Coors",
+    "profile": {
+      "bitterness": 0.45,
+      "hoppy": 0.4,
+      "sweetness": 0.5,
+      "body": 0.55,
+      "malt": 0.65,
+      "fruit": 0.25,
+      "sour": 0.1,
+      "roast": 0.35,
+      "abv_preference": 0.5,
+      "crispness": 0.45
+    }
+  },
+  {
+    "id": "am-04",
+    "name": "Dale's Pale Ale",
+    "brewery": "Oskar Blues",
+    "profile": {
+      "bitterness": 0.45,
+      "hoppy": 0.4,
+      "sweetness": 0.5,
+      "body": 0.55,
+      "malt": 0.65,
+      "fruit": 0.25,
+      "sour": 0.1,
+      "roast": 0.35,
+      "abv_preference": 0.5,
+      "crispness": 0.45
+    }
+  },
+  {
+    "id": "pi-01",
+    "name": "Bitburger",
+    "brewery": "Bitburger",
+    "profile": {
+      "bitterness": 0.5,
+      "hoppy": 0.45,
+      "sweetness": 0.35,
+      "body": 0.3,
+      "malt": 0.45,
+      "fruit": 0.15,
+      "sour": 0.1,
+      "roast": 0.1,
+      "abv_preference": 0.45,
+      "crispness": 0.9
+    }
+  },
+  {
+    "id": "pi-02",
+    "name": "Stella Artois",
+    "brewery": "AB InBev",
+    "profile": {
+      "bitterness": 0.5,
+      "hoppy": 0.45,
+      "sweetness": 0.35,
+      "body": 0.3,
+      "malt": 0.45,
+      "fruit": 0.15,
+      "sour": 0.1,
+      "roast": 0.1,
+      "abv_preference": 0.45,
+      "crispness": 0.9
+    }
+  },
+  {
+    "id": "pi-03",
+    "name": "Beck's",
+    "brewery": "Beck's",
+    "profile": {
+      "bitterness": 0.5,
+      "hoppy": 0.45,
+      "sweetness": 0.35,
+      "body": 0.3,
+      "malt": 0.45,
+      "fruit": 0.15,
+      "sour": 0.1,
+      "roast": 0.1,
+      "abv_preference": 0.45,
+      "crispness": 0.9
+    }
+  },
+  {
+    "id": "pi-04",
+    "name": "Victory Prima Pils",
+    "brewery": "Victory",
+    "profile": {
+      "bitterness": 0.5,
+      "hoppy": 0.45,
+      "sweetness": 0.35,
+      "body": 0.3,
+      "malt": 0.45,
+      "fruit": 0.15,
+      "sour": 0.1,
+      "roast": 0.1,
+      "abv_preference": 0.45,
+      "crispness": 0.9
+    }
+  },
+  {
+    "id": "ipa-05",
+    "name": "Sierra Nevada Pale",
+    "brewery": "Sierra Nevada",
+    "profile": {
+      "bitterness": 0.9,
+      "hoppy": 0.95,
+      "sweetness": 0.2,
+      "body": 0.5,
+      "malt": 0.3,
+      "fruit": 0.3,
+      "sour": 0.1,
+      "roast": 0.1,
+      "abv_preference": 0.65,
+      "crispness": 0.6
+    }
+  },
+  {
+    "id": "ne-05",
+    "name": "Green",
+    "brewery": "Tree House",
+    "profile": {
+      "bitterness": 0.4,
+      "hoppy": 0.85,
+      "sweetness": 0.5,
+      "body": 0.45,
+      "malt": 0.35,
+      "fruit": 0.7,
+      "sour": 0.15,
+      "roast": 0.1,
+      "abv_preference": 0.55,
+      "crispness": 0.55
+    }
+  },
+  {
+    "id": "st-05",
+    "name": "Founders Porter",
+    "brewery": "Founders",
+    "profile": {
+      "bitterness": 0.5,
+      "hoppy": 0.3,
+      "sweetness": 0.35,
+      "body": 0.9,
+      "malt": 0.7,
+      "fruit": 0.2,
+      "sour": 0.1,
+      "roast": 0.85,
+      "abv_preference": 0.6,
+      "crispness": 0.2
+    }
+  },
+  {
+    "id": "lg-05",
+    "name": "Spaten Lager",
+    "brewery": "Spaten",
+    "profile": {
+      "bitterness": 0.35,
+      "hoppy": 0.25,
+      "sweetness": 0.4,
+      "body": 0.35,
+      "malt": 0.5,
+      "fruit": 0.2,
+      "sour": 0.1,
+      "roast": 0.15,
+      "abv_preference": 0.45,
+      "crispness": 0.85
+    }
+  },
+  {
+    "id": "wh-05",
+    "name": "Shock Top",
+    "brewery": "Shock Top",
+    "profile": {
+      "bitterness": 0.25,
+      "hoppy": 0.2,
+      "sweetness": 0.55,
+      "body": 0.5,
+      "malt": 0.55,
+      "fruit": 0.5,
+      "sour": 0.2,
+      "roast": 0.1,
+      "abv_preference": 0.45,
+      "crispness": 0.5
+    }
+  },
+  {
+    "id": "so-05",
+    "name": "Gose",
+    "brewery": "Westbrook",
+    "profile": {
+      "bitterness": 0.2,
+      "hoppy": 0.15,
+      "sweetness": 0.5,
+      "body": 0.4,
+      "malt": 0.3,
+      "fruit": 0.6,
+      "sour": 0.9,
+      "roast": 0.05,
+      "abv_preference": 0.4,
+      "crispness": 0.5
+    }
+  },
+  {
+    "id": "am-05",
+    "name": "Newcastle Brown",
+    "brewery": "Heineken",
+    "profile": {
+      "bitterness": 0.45,
+      "hoppy": 0.4,
+      "sweetness": 0.5,
+      "body": 0.55,
+      "malt": 0.65,
+      "fruit": 0.25,
+      "sour": 0.1,
+      "roast": 0.35,
+      "abv_preference": 0.5,
+      "crispness": 0.45
+    }
+  },
+  {
+    "id": "pi-05",
+    "name": "Trumer Pils",
+    "brewery": "Trumer",
+    "profile": {
+      "bitterness": 0.5,
+      "hoppy": 0.45,
+      "sweetness": 0.35,
+      "body": 0.3,
+      "malt": 0.45,
+      "fruit": 0.15,
+      "sour": 0.1,
+      "roast": 0.1,
+      "abv_preference": 0.45,
+      "crispness": 0.9
+    }
+  }
+]

@@ -1,0 +1,310 @@
+{
+  "roots": [
+    {
+      "id": "ipa",
+      "name": "IPA",
+      "profile": {
+        "bitterness": 0.9,
+        "hoppy": 0.95,
+        "sweetness": 0.2,
+        "body": 0.5,
+        "malt": 0.3,
+        "fruit": 0.3,
+        "sour": 0.1,
+        "roast": 0.1,
+        "abv_preference": 0.65,
+        "crispness": 0.6
+      },
+      "children": [
+        {
+          "id": "ipa-wc",
+          "name": "West Coast IPA",
+          "profile": {
+            "bitterness": 0.9,
+            "hoppy": 0.95,
+            "sweetness": 0.2,
+            "body": 0.5,
+            "malt": 0.3,
+            "fruit": 0.3,
+            "sour": 0.1,
+            "roast": 0.1,
+            "abv_preference": 0.65,
+            "crispness": 0.6
+          },
+          "children": [],
+          "beer_ids": [
+            "ipa-01",
+            "ipa-02",
+            "ipa-03",
+            "ipa-04",
+            "ipa-05"
+          ]
+        },
+        {
+          "id": "ipa-ne",
+          "name": "New England IPA",
+          "profile": {
+            "bitterness": 0.4,
+            "hoppy": 0.85,
+            "sweetness": 0.5,
+            "body": 0.45,
+            "malt": 0.35,
+            "fruit": 0.7,
+            "sour": 0.15,
+            "roast": 0.1,
+            "abv_preference": 0.55,
+            "crispness": 0.55
+          },
+          "children": [],
+          "beer_ids": [
+            "ne-01",
+            "ne-02",
+            "ne-03",
+            "ne-04",
+            "ne-05"
+          ]
+        }
+      ],
+      "beer_ids": []
+    },
+    {
+      "id": "dark",
+      "name": "Dark beers",
+      "profile": {
+        "bitterness": 0.5,
+        "hoppy": 0.3,
+        "sweetness": 0.35,
+        "body": 0.9,
+        "malt": 0.7,
+        "fruit": 0.2,
+        "sour": 0.1,
+        "roast": 0.85,
+        "abv_preference": 0.6,
+        "crispness": 0.2
+      },
+      "children": [
+        {
+          "id": "stout",
+          "name": "Stout & porter",
+          "profile": {
+            "bitterness": 0.5,
+            "hoppy": 0.3,
+            "sweetness": 0.35,
+            "body": 0.9,
+            "malt": 0.7,
+            "fruit": 0.2,
+            "sour": 0.1,
+            "roast": 0.85,
+            "abv_preference": 0.6,
+            "crispness": 0.2
+          },
+          "children": [],
+          "beer_ids": [
+            "st-01",
+            "st-02",
+            "st-03",
+            "st-04",
+            "st-05"
+          ]
+        }
+      ],
+      "beer_ids": []
+    },
+    {
+      "id": "lager-family",
+      "name": "Lagers & pilsners",
+      "profile": {
+        "bitterness": 0.35,
+        "hoppy": 0.25,
+        "sweetness": 0.4,
+        "body": 0.35,
+        "malt": 0.5,
+        "fruit": 0.2,
+        "sour": 0.1,
+        "roast": 0.15,
+        "abv_preference": 0.45,
+        "crispness": 0.85
+      },
+      "children": [
+        {
+          "id": "pilsner",
+          "name": "Pilsner",
+          "profile": {
+            "bitterness": 0.5,
+            "hoppy": 0.45,
+            "sweetness": 0.35,
+            "body": 0.3,
+            "malt": 0.45,
+            "fruit": 0.15,
+            "sour": 0.1,
+            "roast": 0.1,
+            "abv_preference": 0.45,
+            "crispness": 0.9
+          },
+          "children": [],
+          "beer_ids": [
+            "lg-01",
+            "pi-01",
+            "pi-02",
+            "pi-03",
+            "pi-04",
+            "pi-05"
+          ]
+        },
+        {
+          "id": "lager",
+          "name": "Lager",
+          "profile": {
+            "bitterness": 0.35,
+            "hoppy": 0.25,
+            "sweetness": 0.4,
+            "body": 0.35,
+            "malt": 0.5,
+            "fruit": 0.2,
+            "sour": 0.1,
+            "roast": 0.15,
+            "abv_preference": 0.45,
+            "crispness": 0.85
+          },
+          "children": [],
+          "beer_ids": [
+            "lg-02",
+            "lg-03",
+            "lg-04",
+            "lg-05"
+          ]
+        }
+      ],
+      "beer_ids": []
+    },
+    {
+      "id": "wheat-family",
+      "name": "Wheat",
+      "profile": {
+        "bitterness": 0.25,
+        "hoppy": 0.2,
+        "sweetness": 0.55,
+        "body": 0.5,
+        "malt": 0.55,
+        "fruit": 0.5,
+        "sour": 0.2,
+        "roast": 0.1,
+        "abv_preference": 0.45,
+        "crispness": 0.5
+      },
+      "children": [
+        {
+          "id": "wheat",
+          "name": "Wheat beer",
+          "profile": {
+            "bitterness": 0.25,
+            "hoppy": 0.2,
+            "sweetness": 0.55,
+            "body": 0.5,
+            "malt": 0.55,
+            "fruit": 0.5,
+            "sour": 0.2,
+            "roast": 0.1,
+            "abv_preference": 0.45,
+            "crispness": 0.5
+          },
+          "children": [],
+          "beer_ids": [
+            "wh-01",
+            "wh-02",
+            "wh-03",
+            "wh-04",
+            "wh-05"
+          ]
+        }
+      ],
+      "beer_ids": []
+    },
+    {
+      "id": "sour-family",
+      "name": "Sour & wild",
+      "profile": {
+        "bitterness": 0.2,
+        "hoppy": 0.15,
+        "sweetness": 0.5,
+        "body": 0.4,
+        "malt": 0.3,
+        "fruit": 0.6,
+        "sour": 0.9,
+        "roast": 0.05,
+        "abv_preference": 0.4,
+        "crispness": 0.5
+      },
+      "children": [
+        {
+          "id": "sour",
+          "name": "Sour ale",
+          "profile": {
+            "bitterness": 0.2,
+            "hoppy": 0.15,
+            "sweetness": 0.5,
+            "body": 0.4,
+            "malt": 0.3,
+            "fruit": 0.6,
+            "sour": 0.9,
+            "roast": 0.05,
+            "abv_preference": 0.4,
+            "crispness": 0.5
+          },
+          "children": [],
+          "beer_ids": [
+            "so-01",
+            "so-02",
+            "so-03",
+            "so-04",
+            "so-05"
+          ]
+        }
+      ],
+      "beer_ids": []
+    },
+    {
+      "id": "amber-family",
+      "name": "Amber & pale",
+      "profile": {
+        "bitterness": 0.45,
+        "hoppy": 0.4,
+        "sweetness": 0.5,
+        "body": 0.55,
+        "malt": 0.65,
+        "fruit": 0.25,
+        "sour": 0.1,
+        "roast": 0.35,
+        "abv_preference": 0.5,
+        "crispness": 0.45
+      },
+      "children": [
+        {
+          "id": "amber",
+          "name": "Amber ale",
+          "profile": {
+            "bitterness": 0.45,
+            "hoppy": 0.4,
+            "sweetness": 0.5,
+            "body": 0.55,
+            "malt": 0.65,
+            "fruit": 0.25,
+            "sour": 0.1,
+            "roast": 0.35,
+            "abv_preference": 0.5,
+            "crispness": 0.45
+          },
+          "children": [],
+          "beer_ids": [
+            "am-01",
+            "am-02",
+            "am-03",
+            "am-04",
+            "am-05"
+          ]
+        }
+      ],
+      "beer_ids": []
+    }
+  ]
+}
