@@ -12,6 +12,28 @@
 | **Active phase(s)**    | phase-4-polish (complete); all phases shipped                                        |
 
 
+## Architect sign-off (v1.6.0)
+
+| Field | Value |
+|-------|-------|
+| **PRD version** | v1.6.0 |
+| **Signed by** | James Mair (architect) |
+| **Date** | 2026-06-01 |
+| **Baseline** | v1.5.0 (Phase 3 complete — blurbs, catalog recs, LLM-generated questions) |
+
+Reviewed Phase 4 handoff ([docs/phases/phase-4-polish/handoff-to-acr.md](../phases/phase-4-polish/handoff-to-acr.md)) and delta. The following **new or materially changed user-facing capabilities** since v1.5.0 are approved for demo release:
+
+| Capability | Status | Notes |
+|------------|--------|-------|
+| **MD export** | Approved | Download recommendations as `.md` from results screen ([#23](https://github.com/james-p-ai/beerme/issues/23)). PDF remains out of scope. |
+| **Question bank** | Approved | Deterministic axis questions + banked answers replace Ollama question generation. Ollama retained for extract fallback and optional blurbs only. Unplanned deviation — improves demo stability. |
+| **Refining mode** | Approved | "Ask more questions" re-opens low-confidence axes instead of bouncing to results. |
+
+No other net-new product scope beyond v1.5.0. QA ([#22](https://github.com/james-p-ai/beerme/issues/22)) complete; smoke script is the remaining human verification gate.
+
+**Sign-off:** Phase 4 complete. PRD v1.6.0 is the canonical demo-ready release.
+
+
 ## Changelog
 
 ### v1.6.0 (2026-06-01) — ACR after Phase 4 polish

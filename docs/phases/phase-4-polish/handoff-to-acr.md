@@ -33,3 +33,7 @@ Blurbs: sidebar toggle on results screen. Export: download button on results scr
 ## Next
 
 Product demo-ready. No Phase 5 unless new PRD scope.
+
+## Architect sign-off
+
+Recorded in [docs/prd/PRD.md](../../prd/PRD.md) — v1.6.0 sign-off block (2026-06-01, James Mair). New since v1.5.0: MD export, question bank, refining mode.
