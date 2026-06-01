@@ -14,7 +14,7 @@ capture() {
   printf -v "$var" '%s' "$answer"
 }
 
-step "Start Ollama and run: cd ~/work/beerme && ./run.sh"
+step "Start Ollama and run: cd ~/work/projects/beerme && ./run.sh"
 step "Confirm sidebar shows Ollama connected with model installed"
 step "Answer 4+ banked questions — progress bar should rise; no duplicate axis topics"
 capture SAW_RECS "Did recommendations appear after enough answers? (y/n)"
