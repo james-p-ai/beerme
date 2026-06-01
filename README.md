@@ -39,7 +39,7 @@ Autonomous small-task loop for AFK-friendly work (e.g. `taste_profile` TDD).
 | Batch | Issue | prd file |
 |-------|-------|----------|
 | taste_profile (done) | [#6](https://github.com/james-p-ai/beerme/issues/6) | `scripts/ralph/prd.json` |
-| Ollama JSON (open) | [#14](https://github.com/james-p-ai/beerme/issues/14) | `scripts/ralph/prd-ollama.json` |
+| Ollama JSON (complete) | [#14](https://github.com/james-p-ai/beerme/issues/14) | `scripts/ralph/prd-ollama.json` — see [ralph-playbook](docs/workflow/ralph-playbook.md) |
 
 ```bash
 PRD_JSON=scripts/ralph/prd-ollama.json ./scripts/ralph/ralph.sh
