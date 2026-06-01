@@ -63,6 +63,7 @@ See [docs/workflow/kanban.md](docs/workflow/kanban.md).
 | Phase 1 handoff | [docs/phases/phase-1-foundation/handoff-to-acr.md](docs/phases/phase-1-foundation/handoff-to-acr.md) |
 | Phase 2 handoff | [docs/phases/phase-2-taste-engine/handoff-to-acr.md](docs/phases/phase-2-taste-engine/handoff-to-acr.md) |
 | Phase 3 handoff | [docs/phases/phase-3-catalog-recs/handoff-to-acr.md](docs/phases/phase-3-catalog-recs/handoff-to-acr.md) |
+| Phase 4 kickoff | [docs/phases/phase-4-polish/kickoff.md](docs/phases/phase-4-polish/kickoff.md) |
 | SOP addendum | [docs/sop/verification-addendum.md](docs/sop/verification-addendum.md) |
 | Full SOP copy | [docs/sop/prd-cycle-sop.full.md](docs/sop/prd-cycle-sop.full.md) |
 | Skills map | [docs/workflow/skills-map.md](docs/workflow/skills-map.md) |

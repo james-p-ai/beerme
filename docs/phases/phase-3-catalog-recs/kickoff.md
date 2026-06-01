@@ -7,4 +7,4 @@
 
 ## Tickets
 
-P3-T1 catalog JSON, P3-T2 recommender + tests, P3-T3 tree UI, P3-T4 (optional blurbs deferred)
+P3-T1 catalog JSON, P3-T2 recommender + tests, P3-T3 tree UI, P3-T4 optional LLM blurbs (sidebar toggle, batch Ollama)

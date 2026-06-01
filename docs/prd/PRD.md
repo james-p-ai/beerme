@@ -2,15 +2,32 @@
 
 ## Version header
 
-| Field | Value |
-|-------|-------|
-| **Version** | v1.3.0 |
-| **Date** | 2026-06-01 |
-| **Author** | James Mair |
-| **Summary of changes** | Phase 3 complete: catalog, recommender, hierarchical UI. See changelog. |
-| **Active phase(s)** | phase-3-catalog-recs (complete); next: polish / demo |
+
+| Field                  | Value                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------ |
+| **Version**            | v1.5.0                                                                               |
+| **Date**               | 2026-06-01                                                                           |
+| **Author**             | James Mair                                                                           |
+| **Summary of changes** | Phase 3 complete incl. optional LLM blurbs; Phase 4 polish active. See changelog. |
+| **Active phase(s)**    | phase-4-polish (active); phase-3-catalog-recs (complete)                             |
+
 
 ## Changelog
+
+### v1.5.0 (2026-06-01) — ACR after Phase 3 completion (P3-T4)
+
+- Shipped [#21](https://github.com/james-p-ai/beerme/issues/21) P3-T4: optional sidebar toggle for batch LLM tasting notes on results tree; catalog IDs only, prose from Ollama.
+- `BLURB_PROMPT` contract in `app/prompts.py`; blurbs cached per results set in session state.
+- Phase 3 (`phase-3-catalog-recs`) closed; Phase 4 kickoff at `docs/phases/phase-4-polish/kickoff.md`.
+- Next: [#22](https://github.com/james-p-ai/beerme/issues/22) QA session, [#23](https://github.com/james-p-ai/beerme/issues/23) export.
+
+### v1.4.0 (2026-06-01) — ACR after Ralph Ollama JSON batch
+
+- Closed Ralph batch [#14](https://github.com/james-p-ai/beerme/issues/14): `parse_json_response` (plain + embedded JSON) and `chat_json` one-retry on invalid JSON — all mocked, no live Ollama.
+- `scripts/ralph/prd-ollama.json` stories `ollama-01`–`ollama-03` all `passes: true`; merged via PR #84.
+- GitHub Kanban bootstrap (`scripts/github/bootstrap-kanban.sh`), `docs/github/KANBAN.md`, Ralph playbook linked from README.
+- Phase 3 core complete; [#21](https://github.com/james-p-ai/beerme/issues/21) (LLM blurbs) still deferred.
+- Phase 4 polish tickets [#22](https://github.com/james-p-ai/beerme/issues/22) (QA session), [#23](https://github.com/james-p-ai/beerme/issues/23) (export) open in Backlog.
 
 ### v1.3.0 (2026-06-01) — ACR after Phase 3
 
@@ -60,7 +77,8 @@ BeerMe runs locally: asks short flavor questions powered by Ollama, builds a str
 - **Taste axes (10):** bitterness, sweetness, body, roast, fruit, sour, hoppy, malt, abv_preference, crispness.
 - **Profile merge:** LLM returns JSON deltas; Python clamps 0–1 and updates per-axis confidence.
 - **Session confidence:** `min_axes=6` with per-axis confidence ≥ 0.6, `min_turns=4`.
-- **Ollama contract:** `next_question` and `extract_preferences` JSON schemas in `app/prompts.py`.
+- **Ollama contract:** `next_question`, `extract_preferences`, and `blurbs` JSON schemas in `app/prompts.py`; `chat_json` retries once on parse failure.
+- **LLM blurbs (optional):** Sidebar toggle on results; one batch call with catalog beer metadata + profile; response keys validated ⊆ requested catalog IDs; recommendations unchanged (deterministic scoring).
 - **Recommendations:** Dot-product style scoring on tree; top 3 branches expanded to beers.
 - **Modules:** `taste_profile`, `recommender`, `ollama_client`, `main` (Streamlit).
 
@@ -68,8 +86,10 @@ BeerMe runs locally: asks short flavor questions powered by Ollama, builds a str
 
 - Test **public behavior** via `taste_profile` and `recommender` APIs only.
 - Fixtures in `tests/fixtures/` for catalog; no live Ollama in unit tests.
-- `ollama_client`: parse/retry with recorded JSON fixtures.
-- Streamlit: manual Verify column / `scripts/qa/beerme-smoke.sh`.
+- `ollama_client`: four unit tests in `tests/test_ollama_client.py` — plain JSON, embedded JSON, invalid raises, `chat_json` retry with mocked `chat`; no live server.
+- `taste_profile` / `recommender`: public API + fixtures only.
+- Streamlit + live Ollama (quiz, blurbs): manual only — `scripts/qa/beerme-smoke.sh` or qa skill ([#22](https://github.com/james-p-ai/beerme/issues/22)).
+- Ralph AFK stories: acceptance = single pytest node from `scripts/ralph/prd-<batch>.json`; human Verify gate on Kanban before Done.
 
 ## Out of Scope
 
@@ -79,3 +99,8 @@ BeerMe runs locally: asks short flavor questions powered by Ollama, builds a str
 
 - See `docs/workflow/` for SOP, Kanban, Ralph, and mattpocock skills map.
 - GitHub PRD epic mirrors this doc; `docs/prd/PRD.md` is canonical for versioning.
+- Kanban + issue bootstrap: docs/github/KANBAN.md, ./scripts/github/bootstrap-kanban.sh.
+- Ralph loop: docs/workflow/ralph-playbook.md; run PRD_JSON=scripts/ralph/prd-ollama.json ./scripts/ralph/ralph.sh.
+- Epic label on [#1](https://github.com/james-p-ai/beerme/issues/1): `prd:v1.5.0`.
+- ready-for-human = HITL (product, live LLM, UI judgment); ralph-ready = AFK pytest stories.
+

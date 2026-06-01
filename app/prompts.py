@@ -12,3 +12,8 @@ EXTRACT_PROMPT = SYSTEM_BASE + """
 Given the user's latest answer and profile, output preference deltas:
 {"delta": {"bitterness": {"value": 0.7, "confidence": 0.8}, ...}}
 Only include axes you can infer."""
+
+BLURB_PROMPT = SYSTEM_BASE + """
+Given the user's taste profile and a list of catalog beers (id, name, brewery, profile),
+write one short sentence per beer explaining why it fits. Use ONLY the beer ids provided.
+Output: {"blurbs": {"ipa-01": "...", "stout-02": "..."}}"""
