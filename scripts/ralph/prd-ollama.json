@@ -5,20 +5,20 @@
     {
       "id": "ollama-01",
       "title": "parse_json_response handles plain JSON",
-      "passes": false,
-      "acceptance": "pytest tests/test_ollama_client.py::test_parse_plain_json"
+      "passes": true,
+      "acceptance": "tests/test_ollama_client.py::test_parse_plain_json"
     },
     {
       "id": "ollama-02",
       "title": "parse_json_response extracts JSON from prose",
-      "passes": false,
-      "acceptance": "pytest tests/test_ollama_client.py::test_parse_json_embedded_in_text"
+      "passes": true,
+      "acceptance": "tests/test_ollama_client.py::test_parse_json_embedded_in_text"
     },
     {
       "id": "ollama-03",
       "title": "chat_json retries once on invalid JSON",
-      "passes": false,
-      "acceptance": "pytest tests/test_ollama_client.py::test_chat_json_retries_on_invalid"
+      "passes": true,
+      "acceptance": "tests/test_ollama_client.py::test_chat_json_retries_on_invalid"
     }
   ]
 }

@@ -1,2 +1,12 @@
 # Ralph progress (append-only)
 # 2026-06-01: conf-01..04 implemented via TDD in tests/test_confidence.py
+2026-06-01 ollama-01 done — confirmed test_parse_plain_json green
+2026-06-01 ollama-02 done — confirmed test_parse_json_embedded_in_text green
+2026-06-01 ollama-03 done — test_chat_json_retries_on_invalid with mocked chat
+
+## Repeat next time
+- One story = one chat + one commit + one pytest node
+- prd.json acceptance path without "pytest " prefix
+- AFK only: pure Python / mocked boundaries; Streamlit/Ollama live = HITL
+- Kanban Verify before closing parent ralph-batch issue
+- Run: PRD_JSON=scripts/ralph/prd-<batch>.json ./scripts/ralph/ralph.sh
