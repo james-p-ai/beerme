@@ -5,4 +5,4 @@
 | P3-T1 catalog | Yes — 40 beers |
 | P3-T2 recommender | Yes + tests |
 | P3-T3 tree UI | Yes — expanders |
-| P3-T4 LLM blurbs | Deferred |
+| P3-T4 LLM blurbs | Yes — optional sidebar toggle, batch Ollama, catalog IDs only |

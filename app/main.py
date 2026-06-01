@@ -3,16 +3,19 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from typing import Any
 
 import streamlit as st
 
 from app import ollama_client
-from app.prompts import EXTRACT_PROMPT, NEXT_QUESTION_PROMPT
+from app.prompts import BLURB_PROMPT, EXTRACT_PROMPT, NEXT_QUESTION_PROMPT
 from app.recommender import BeerLeaf, StyleNode, recommend_hierarchy
 from app.taste_profile import TasteProfile
 
 st.set_page_config(page_title="BeerMe", page_icon="🍺", layout="centered")
+
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 
 def _init_state() -> None:
@@ -24,6 +27,10 @@ def _init_state() -> None:
         st.session_state.history: list[dict[str, str]] = []
     if "current_question" not in st.session_state:
         st.session_state.current_question = None
+    if "blurbs" not in st.session_state:
+        st.session_state.blurbs: dict[str, str] = {}
+    if "blurbs_for_ids" not in st.session_state:
+        st.session_state.blurbs_for_ids: tuple[str, ...] | None = None
 
 
 def _reset() -> None:
@@ -31,6 +38,8 @@ def _reset() -> None:
     st.session_state.phase = "questioning"
     st.session_state.history = []
     st.session_state.current_question = None
+    st.session_state.blurbs = {}
+    st.session_state.blurbs_for_ids = None
 
 
 def _fetch_question(profile: TasteProfile) -> dict[str, Any]:
@@ -57,13 +66,64 @@ def _apply_answer(profile: TasteProfile, answer: str) -> None:
     profile.record_turn()
 
 
-def _render_tree(nodes: list[StyleNode], depth: int = 0) -> None:
+def _collect_beer_leaves(nodes: list[StyleNode]) -> list[BeerLeaf]:
+    leaves: list[BeerLeaf] = []
+    for node in nodes:
+        if isinstance(node, BeerLeaf):
+            leaves.append(node)
+        else:
+            leaves.extend(_collect_beer_leaves(node.children))
+    return leaves
+
+
+def _validate_blurbs(raw: dict[str, Any], allowed_ids: set[str]) -> dict[str, str]:
+    blurbs = raw.get("blurbs", raw)
+    if not isinstance(blurbs, dict):
+        return {}
+    return {k: str(v) for k, v in blurbs.items() if k in allowed_ids and v}
+
+
+def _fetch_blurbs(profile: TasteProfile, leaves: list[BeerLeaf]) -> dict[str, str]:
+    with open(DATA_DIR / "beers.json", encoding="utf-8") as f:
+        catalog = {b["id"]: b for b in json.load(f)}
+
+    allowed_ids = {leaf.id for leaf in leaves}
+    beers = []
+    for leaf in leaves:
+        beer = catalog.get(leaf.id)
+        if not beer:
+            continue
+        beers.append(
+            {
+                "id": beer["id"],
+                "name": beer["name"],
+                "brewery": beer.get("brewery", ""),
+                "profile": beer.get("profile", {}),
+            }
+        )
+
+    ctx = {"profile": profile.to_dict(), "beers": beers}
+    messages = [
+        {"role": "system", "content": BLURB_PROMPT},
+        {"role": "user", "content": json.dumps(ctx)},
+    ]
+    data = ollama_client.chat_json(messages)
+    return _validate_blurbs(data, allowed_ids)
+
+
+def _render_tree(
+    nodes: list[StyleNode],
+    blurbs: dict[str, str] | None = None,
+    depth: int = 0,
+) -> None:
     for node in nodes:
         if isinstance(node, BeerLeaf):
             st.markdown(f"{'  ' * depth}- **{node.name}** ({node.brewery}) — score {node.score:.2f}")
+            if blurbs and node.id in blurbs:
+                st.caption(f"{'  ' * depth}{blurbs[node.id]}")
         else:
             with st.expander(f"{'  ' * depth}{node.name} (score {node.score:.2f})", expanded=depth == 0):
-                _render_tree(node.children, depth + 1)
+                _render_tree(node.children, blurbs, depth + 1)
 
 
 def main() -> None:
@@ -84,6 +144,13 @@ def main() -> None:
         st.sidebar.error("Ollama not reachable. Start Ollama and pull a model.")
         st.sidebar.code("ollama pull llama3.2:3b", language="bash")
 
+    st.sidebar.checkbox(
+        "Generate tasting notes (Ollama)",
+        value=False,
+        disabled=not ok,
+        key="show_blurbs",
+    )
+
     if st.sidebar.button("Reset session"):
         _reset()
         st.rerun()
@@ -100,9 +167,25 @@ def main() -> None:
         if not ok:
             st.warning("Ollama offline — showing catalog ranking from profile only.")
         tree = recommend_hierarchy(profile)
-        _render_tree(tree)
+        blurbs: dict[str, str] | None = None
+        if st.session_state.show_blurbs and ok:
+            leaves = _collect_beer_leaves(tree)
+            ids = tuple(sorted(leaf.id for leaf in leaves))
+            if ids and st.session_state.blurbs_for_ids != ids:
+                with st.spinner("Generating tasting notes…"):
+                    try:
+                        st.session_state.blurbs = _fetch_blurbs(profile, leaves)
+                        st.session_state.blurbs_for_ids = ids
+                    except Exception as e:
+                        st.warning(f"Could not generate tasting notes: {e}")
+                        st.session_state.blurbs = {}
+                        st.session_state.blurbs_for_ids = None
+            blurbs = st.session_state.blurbs or None
+        _render_tree(tree, blurbs)
         if st.button("Ask more questions"):
             st.session_state.phase = "questioning"
+            st.session_state.blurbs = {}
+            st.session_state.blurbs_for_ids = None
             st.rerun()
         return
 
@@ -141,6 +224,8 @@ def main() -> None:
         st.session_state.current_question = None
         if profile.is_ready():
             st.session_state.phase = "results"
+            st.session_state.blurbs = {}
+            st.session_state.blurbs_for_ids = None
         st.rerun()
 
 
