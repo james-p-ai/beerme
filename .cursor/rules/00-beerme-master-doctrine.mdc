@@ -1,0 +1,27 @@
+---
+description: BeerMe master doctrine — load AGENTS.md non-negotiables every session.
+alwaysApply: true
+---
+
+# BeerMe master doctrine
+
+Read `@AGENTS.md` and `@CONTEXT.md` at session start.
+
+## Non-negotiables (summary)
+
+- LLM → axis updates only; **Python computes session confidence**.
+- Recommender → **catalog IDs/names only**; no invented beers.
+- LLM must not change scores, catalog, or confidence math.
+- Ollama in `ollama_client.py`; pytest uses fixtures for engine logic.
+- One issue → one chat; board is source of truth for work.
+
+## Subagent routing
+
+| Path / ticket | Subagent |
+|---------------|----------|
+| `app/ollama_client.py`, `app/prompts.py` | `/orion` |
+| `app/taste_profile.py`, `app/recommender.py`, `data/*` | `/engine` |
+| `app/main.py`, `app/export_md.py` | `/voyager` |
+| Phase 7, smoke, release check | `/verify` (readonly) |
+
+Skills handle procedure (`tdd`, `to-issues`, `triage`, etc.). Subagents enforce domain boundaries.

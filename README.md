@@ -60,6 +60,10 @@ See [docs/workflow/kanban.md](docs/workflow/kanban.md).
 
 | Artifact | Path |
 |----------|------|
+| Agent doctrine | [AGENTS.md](AGENTS.md) |
+| Cursor usage | [docs/cursor-teams/CURSOR_USAGE_GUIDE.md](docs/cursor-teams/CURSOR_USAGE_GUIDE.md) |
+| Release gates | [docs/cursor-teams/RELEASE_GATES.md](docs/cursor-teams/RELEASE_GATES.md) |
+| Handoff template | [docs/cursor-teams/TASK_HANDOFF_TEMPLATE.md](docs/cursor-teams/TASK_HANDOFF_TEMPLATE.md) |
 | PRD (canonical) | [docs/prd/PRD.md](docs/prd/PRD.md) |
 | Phase 1 handoff | [docs/phases/phase-1-foundation/handoff-to-acr.md](docs/phases/phase-1-foundation/handoff-to-acr.md) |
 | Phase 2 handoff | [docs/phases/phase-2-taste-engine/handoff-to-acr.md](docs/phases/phase-2-taste-engine/handoff-to-acr.md) |
@@ -69,31 +73,44 @@ See [docs/workflow/kanban.md](docs/workflow/kanban.md).
 | SOP addendum | [docs/sop/verification-addendum.md](docs/sop/verification-addendum.md) |
 | Full SOP copy | [docs/sop/prd-cycle-sop.full.md](docs/sop/prd-cycle-sop.full.md) |
 | Skills map | [docs/workflow/skills-map.md](docs/workflow/skills-map.md) |
+| External skills | [docs/workflow/external-skills.md](docs/workflow/external-skills.md) |
 | TDD workflow | [docs/workflow/tdd.md](docs/workflow/tdd.md) |
 | Kanban | [docs/workflow/kanban.md](docs/workflow/kanban.md) |
 | Agent config | [docs/agents/](docs/agents/) |
 | Domain glossary | [CONTEXT.md](CONTEXT.md) |
+| Subagents | [.cursor/agents/](.cursor/agents/) |
 
-## Matt Pocock skills (local)
+## Practical Office skills (local)
 
-Symlinked under `~/.cursor/skills/` from `~/.cursor/skills-mattpocock`. Repo configured via [AGENTS.md](AGENTS.md).
+Install from [Practical-Office/cursor-skills](https://github.com/Practical-Office/cursor-skills):
+
+```bash
+git clone https://github.com/Practical-Office/cursor-skills.git
+cd cursor-skills && ./scripts/install.sh
+```
+
+Repo configured via [AGENTS.md](AGENTS.md) and [docs/agents/](docs/agents/). Full phase map: [docs/workflow/skills-map.md](docs/workflow/skills-map.md).
 
 | Skill | Use |
 |-------|-----|
-| `setup-matt-pocock-skills` | Done — `docs/agents/*` |
+| `setup-practical-ai-skills` | Done — `docs/agents/*` |
 | `to-prd` | PRD draft / ACR bumps |
 | `to-issues` | Phase → GitHub issues |
 | `tdd` | Ticket implementation |
 | `triage` | Issue labels |
 | `handoff` | Session handoff (not phase handoff) |
-| `grill-me` | Plan review |
+| `grill-with-docs` | Plan / PRD review + CONTEXT updates |
 | `qa` | End-of-phase bug filing |
+| `create-pr` | PR via `gh` |
+| `release-readiness` | Phase 7 gate checklist |
+
+Remove legacy `setup-matt-pocock-skills` symlink from `~/.cursor/skills/` if present.
 
 ## Human verification
 
-- **Plans:** Plan mode + `grill-me`
-- **Code:** Kanban **Verify** column
-- **Smoke:** `bash scripts/qa/beerme-smoke.sh`
+- **Plans:** Plan mode + `grill-with-docs` or `grill-me`
+- **Code:** Kanban **In Review** → **Done**; Ralph batches → **Verify** first
+- **Phase 7:** `/verify` subagent + `release-readiness` + `bash scripts/qa/beerme-smoke.sh`
 
 ## License
 
