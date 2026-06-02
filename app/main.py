@@ -15,7 +15,8 @@ from app.prompts import (
     question_for_axis,
 )
 from app.export_md import format_recommendations_md
-from app.recommender import BeerLeaf, StyleNode, recommend_hierarchy
+from app.export_pdf import format_recommendations_pdf
+from app.recommender import BeerLeaf, StyleNode, collect_beer_leaves, recommend_hierarchy
 from app.taste_profile import TasteProfile
 
 st.set_page_config(page_title="BeerMe", page_icon="🍺", layout="centered")
@@ -87,16 +88,6 @@ def _apply_answer(
     delta = data.get("delta", data)
     profile.apply_delta(delta)
     profile.record_turn()
-
-
-def _collect_beer_leaves(nodes: list[StyleNode]) -> list[BeerLeaf]:
-    leaves: list[BeerLeaf] = []
-    for node in nodes:
-        if isinstance(node, BeerLeaf):
-            leaves.append(node)
-        else:
-            leaves.extend(_collect_beer_leaves(node.children))
-    return leaves
 
 
 def _validate_blurbs(raw: dict[str, Any], allowed_ids: set[str]) -> dict[str, str]:
@@ -196,7 +187,7 @@ def main() -> None:
         tree = recommend_hierarchy(profile)
         blurbs: dict[str, str] | None = None
         if st.session_state.show_blurbs and ok and has_model:
-            leaves = _collect_beer_leaves(tree)
+            leaves = collect_beer_leaves(tree)
             ids = tuple(sorted(leaf.id for leaf in leaves))
             if ids and st.session_state.blurbs_for_ids != ids:
                 with st.spinner("Generating tasting notes…"):
@@ -214,6 +205,12 @@ def main() -> None:
             data=format_recommendations_md(profile, tree, blurbs),
             file_name="beerme-recommendations.md",
             mime="text/markdown",
+        )
+        st.download_button(
+            "Download recommendations (.pdf)",
+            data=format_recommendations_pdf(profile, tree, blurbs),
+            file_name="beerme-recommendations.pdf",
+            mime="application/pdf",
         )
         if st.button("Ask more questions"):
             st.session_state.phase = "questioning"

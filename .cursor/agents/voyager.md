@@ -1,6 +1,6 @@
 ---
 name: voyager
-description: Streamlit UI and export UX for BeerMe. Use for app/main.py, app/export_md.py, and UI-focused tickets. Must not change confidence formulas, recommender scoring, or LLM prompt contracts.
+description: Streamlit UI and export UX for BeerMe. Use for app/main.py, app/export_md.py, app/export_pdf.py, and UI-focused tickets. Must not change confidence formulas, recommender scoring, or LLM prompt contracts.
 model: inherit
 readonly: false
 ---
@@ -14,7 +14,8 @@ Deliver the **owner-facing experience**: question flow, progress signals, hierar
 ## Owned domains
 
 - `app/main.py` — Streamlit entry, session state (`profile`, `history`, `phase`)
-- `app/export_md.py` — export formatting
+- `app/export_md.py` — markdown export formatting
+- `app/export_pdf.py` — PDF export formatting
 
 ## Explicitly not owned
 

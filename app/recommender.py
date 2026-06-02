@@ -46,6 +46,17 @@ def _dot(profile: TasteProfile, vec: dict[str, float]) -> float:
     return total
 
 
+def collect_beer_leaves(nodes: list[StyleNode | BeerLeaf]) -> list[BeerLeaf]:
+    """Flatten a recommendation tree to catalog beer leaves."""
+    leaves: list[BeerLeaf] = []
+    for node in nodes:
+        if isinstance(node, BeerLeaf):
+            leaves.append(node)
+        else:
+            leaves.extend(collect_beer_leaves(node.children))
+    return leaves
+
+
 def recommend_hierarchy(
     profile: TasteProfile,
     *,

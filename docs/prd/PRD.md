@@ -5,11 +5,30 @@
 
 | Field                  | Value                                                                                |
 | ---------------------- | ------------------------------------------------------------------------------------ |
-| **Version**            | v1.6.0                                                                               |
-| **Date**               | 2026-06-01                                                                           |
+| **Version**            | v1.7.0                                                                               |
+| **Date**               | 2026-06-02                                                                           |
 | **Author**             | James Mair                                                                           |
-| **Summary of changes** | Phase 4 complete: QA, MD export, question bank. Demo-ready. See changelog.          |
-| **Active phase(s)**    | phase-4-polish (complete); all phases shipped                                        |
+| **Summary of changes** | Phase 5 active: PDF export + agent doctrine pilot. See changelog.                   |
+| **Active phase(s)**    | phase-5-pdf-export (active)                                                          |
+
+
+## Architect sign-off (v1.7.0)
+
+| Field | Value |
+|-------|-------|
+| **PRD version** | v1.7.0 |
+| **Signed by** | James Mair (architect) |
+| **Date** | 2026-06-02 |
+| **Baseline** | v1.6.0 (Phase 4 complete — demo-ready) |
+
+Reviewed Phase 5 handoff ([docs/phases/phase-5-pdf-export/handoff-to-acr.md](../phases/phase-5-pdf-export/handoff-to-acr.md)) and delta. The following **new or materially changed user-facing capabilities** since v1.6.0 are approved:
+
+| Capability | Status | Notes |
+|------------|--------|-------|
+| **PDF export** | Approved | Download recommendations as `.pdf` from results screen alongside MD export. |
+| **Printable blurb** | Approved | Blurb prompt capped for PDF layout; blurbs unchanged in recommendations logic. |
+
+**Sign-off:** Phase 5 complete. PRD v1.7.0 adds PDF export to demo-ready release.
 
 
 ## Architect sign-off (v1.6.0)
@@ -25,7 +44,7 @@ Reviewed Phase 4 handoff ([docs/phases/phase-4-polish/handoff-to-acr.md](../phas
 
 | Capability | Status | Notes |
 |------------|--------|-------|
-| **MD export** | Approved | Download recommendations as `.md` from results screen ([#23](https://github.com/james-p-ai/beerme/issues/23)). PDF remains out of scope. |
+| **MD export** | Approved | Download recommendations as `.md` from results screen ([#23](https://github.com/james-p-ai/beerme/issues/23)). |
 | **Question bank** | Approved | Deterministic axis questions + banked answers replace Ollama question generation. Ollama retained for extract fallback and optional blurbs only. Unplanned deviation — improves demo stability. |
 | **Refining mode** | Approved | "Ask more questions" re-opens low-confidence axes instead of bouncing to results. |
 
@@ -35,6 +54,14 @@ No other net-new product scope beyond v1.5.0. QA ([#22](https://github.com/james
 
 
 ## Changelog
+
+### v1.7.0 (2026-06-02) — ACR after Phase 5 PDF export + agent pilot
+
+- Phase 5 (`phase-5-pdf-export`): PDF download on results screen (`app/export_pdf.py`, fpdf2).
+- `collect_beer_leaves()` public helper in `app/recommender.py` for export and blurb batching.
+- `BLURB_MAX_CHARS` constraint in `BLURB_PROMPT` for printable export layout.
+- Agent doctrine pilot: tickets routed to `/engine`, `/orion`, `/voyager`, `/verify` per WBS.
+- Phase 5 handoff: `docs/phases/phase-5-pdf-export/handoff-to-acr.md`.
 
 ### v1.6.0 (2026-06-01) — ACR after Phase 4 polish
 
@@ -111,28 +138,30 @@ BeerMe runs locally: asks short flavor questions from a deterministic question b
 - **Ollama contract:** `extract_preferences` and `blurbs` JSON schemas in `app/prompts.py`; `chat_json` retries once on parse failure. Extract used when banked answer mapping fails.
 - **LLM blurbs (optional):** Sidebar toggle on results; one batch call with catalog beer metadata + profile; response keys validated ⊆ requested catalog IDs; recommendations unchanged (deterministic scoring).
 - **MD export:** Results screen download button; `format_recommendations_md()` renders profile table + recommendation tree + optional blurbs.
+- **PDF export:** Results screen download button; `format_recommendations_pdf()` renders same content as printable PDF bytes (fpdf2).
+- **Printable blurb:** `BLURB_MAX_CHARS` in `app/prompts.py`; blurbs truncated at render time for PDF if needed.
 - **Recommendations:** Dot-product style scoring on tree; top 3 branches expanded to beers.
-- **Modules:** `taste_profile`, `recommender`, `ollama_client`, `export_md`, `main` (Streamlit).
+- **Modules:** `taste_profile`, `recommender`, `ollama_client`, `export_md`, `export_pdf`, `main` (Streamlit).
 
 ## Testing Decisions
 
 - Test **public behavior** via `taste_profile`, `recommender`, and `export_md` APIs only.
 - Fixtures in `tests/fixtures/` for catalog; no live Ollama in unit tests.
 - `ollama_client`: unit tests in `tests/test_ollama_client.py` — plain JSON, embedded JSON, markdown fence, invalid raises, `chat_json` retry; no live server.
-- `taste_profile` / `recommender` / `export_md`: public API + fixtures only.
+- `taste_profile` / `recommender` / `export_md` / `export_pdf`: public API + fixtures only.
 - Streamlit + live Ollama (blurbs, full quiz path): manual only — `scripts/qa/beerme-smoke.sh`.
 - Ralph AFK stories: acceptance = single pytest node from `scripts/ralph/prd-<batch>.json`; human Verify gate on Kanban before Done.
 
 ## Out of Scope
 
-- Accounts, payments, cloud deploy, live Untappp/API beer data, training custom models, PDF export.
+- Accounts, payments, cloud deploy, live Untappp/API beer data, training custom models.
 
 ## Further Notes
 
-- See `docs/workflow/` for SOP, Kanban, Ralph, and mattpocock skills map.
+- See `docs/workflow/` for SOP, Kanban, Ralph, and skills map.
 - GitHub PRD epic mirrors this doc; `docs/prd/PRD.md` is canonical for versioning.
 - Kanban + issue bootstrap: docs/github/KANBAN.md, ./scripts/github/bootstrap-kanban.sh.
 - Ralph loop: docs/workflow/ralph-playbook.md; run PRD_JSON=scripts/ralph/prd-ollama.json ./scripts/ralph/ralph.sh.
-- Epic label on [#1](https://github.com/james-p-ai/beerme/issues/1): `prd:v1.6.0`.
+- Epic label on [#1](https://github.com/james-p-ai/beerme/issues/1): `prd:v1.7.0` (Phase 5 epic when filed).
 - ready-for-human = HITL (product, live LLM, UI judgment); ralph-ready = AFK pytest stories.
 

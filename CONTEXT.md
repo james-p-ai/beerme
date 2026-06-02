@@ -10,3 +10,5 @@
 | **Style node** | Hierarchy entry (e.g. IPA → West Coast IPA). |
 | **Recommendation tree** | Ranked style + leaf beer hierarchy from catalog scoring. |
 | **Question turn** | One banked quiz question + answer updates profile. |
+| **Export snapshot** | Profile + recommendation tree + optional blurbs passed to MD/PDF formatters. |
+| **Printable blurb** | Tasting note prose capped for PDF layout (`BLURB_MAX_CHARS`). |

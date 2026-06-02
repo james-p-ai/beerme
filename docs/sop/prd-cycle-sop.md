@@ -1,6 +1,6 @@
 # PRD → ticket → handoff cycle SOP (caveman reference)
 
-Compressed reference. Full text: [prd-cycle-sop.full.md](./prd-cycle-sop.full.md). BeerMe learnings: [verification-addendum.md](./verification-addendum.md).
+Compressed reference. **Canonical seven-phase SOP:** [ai-driven-development-sop.md](./ai-driven-development-sop.md). Full PRD-cycle text: [prd-cycle-sop.full.md](./prd-cycle-sop.full.md). BeerMe learnings: [verification-addendum.md](./verification-addendum.md). Agent pilot: [agent-doctrine-pilot.md](./agent-doctrine-pilot.md).
 
 ## Purpose
 
@@ -43,9 +43,10 @@ Versioned PRD drives phased tickets → engineer in Cursor (plan first) → phas
 |------|-----|
 | GitHub Kanban | Backlog → Verify → Done |
 | Ralph | `scripts/ralph/`; Verify before Done |
-| Matt `to-prd` | PRD draft / ACR |
-| Matt `to-issues` | Vertical slice issues |
-| Matt `tdd` | RED→GREEN per behavior |
+| Practical Office `to-prd` | PRD draft / ACR |
+| Practical Office `to-issues` | Vertical slice issues |
+| Practical Office `tdd` | RED→GREEN per behavior |
+| Subagents | `/orion`, `/engine`, `/voyager`, `/verify` per ticket zone |
 | Session `handoff` | Not same as phase handoff |
 
 ## Rules

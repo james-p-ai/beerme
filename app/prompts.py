@@ -26,10 +26,13 @@ Given the user's latest answer and profile, output preference deltas:
 Only include axes you can infer. If the user picked a 1–10 scale, map value as n/10 with confidence ~0.85.
 If they said they don't know, use low confidence (~0.2) and leave value near 0.5."""
 
-BLURB_PROMPT = SYSTEM_BASE + """
+BLURB_MAX_CHARS = 120
+
+BLURB_PROMPT = SYSTEM_BASE + f"""
 Given the user's taste profile and a list of catalog beers (id, name, brewery, profile),
 write one short sentence per beer explaining why it fits. Use ONLY the beer ids provided.
-Output: {"blurbs": {"ipa-01": "...", "stout-02": "..."}}"""
+Each blurb must be at most {BLURB_MAX_CHARS} characters — short enough for printable export.
+Output: {{"blurbs": {{"ipa-01": "...", "stout-02": "..."}}}}"""
 
 # Fallback questions when the LLM repeats a topic or uses bad wording.
 BITTERNESS_SCALE_CHOICES = [str(n) for n in range(1, 11)] + ["I don't know"]
