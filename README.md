@@ -2,7 +2,7 @@
 
 Local beer taste quiz: Ollama asks flavor questions → Python builds a taste profile → hierarchical recommendations from a static catalog.
 
-Built to verify the [PRD → ticket → handoff → ACR cycle SOP](docs/sop/prd-cycle-sop.full.md).
+Built to verify the [AI-Driven Development SOP](docs/sop/ai-driven-development-sop.md) seven-phase pipeline and [PRD-cycle addendum](docs/sop/prd-cycle-sop.full.md).
 
 **GitHub:** https://github.com/james-p-ai/beerme — [Issues](https://github.com/james-p-ai/beerme/issues) · [Kanban guide](docs/github/KANBAN.md)
 
@@ -71,7 +71,11 @@ See [docs/workflow/kanban.md](docs/workflow/kanban.md).
 | Phase 4 kickoff | [docs/phases/phase-4-polish/kickoff.md](docs/phases/phase-4-polish/kickoff.md) |
 | Phase 4 handoff | [docs/phases/phase-4-polish/handoff-to-acr.md](docs/phases/phase-4-polish/handoff-to-acr.md) |
 | SOP addendum | [docs/sop/verification-addendum.md](docs/sop/verification-addendum.md) |
-| Full SOP copy | [docs/sop/prd-cycle-sop.full.md](docs/sop/prd-cycle-sop.full.md) |
+| **Canonical SOP** | [docs/sop/ai-driven-development-sop.md](docs/sop/ai-driven-development-sop.md) |
+| PRD-cycle addendum | [docs/sop/prd-cycle-sop.full.md](docs/sop/prd-cycle-sop.full.md) |
+| Agent doctrine pilot | [docs/sop/agent-doctrine-pilot.md](docs/sop/agent-doctrine-pilot.md) |
+| Phase 5 kickoff | [docs/phases/phase-5-pdf-export/kickoff.md](docs/phases/phase-5-pdf-export/kickoff.md) |
+| Phase 5 handoff | [docs/phases/phase-5-pdf-export/handoff-to-acr.md](docs/phases/phase-5-pdf-export/handoff-to-acr.md) |
 | Skills map | [docs/workflow/skills-map.md](docs/workflow/skills-map.md) |
 | External skills | [docs/workflow/external-skills.md](docs/workflow/external-skills.md) |
 | TDD workflow | [docs/workflow/tdd.md](docs/workflow/tdd.md) |

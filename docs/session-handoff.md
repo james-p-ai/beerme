@@ -2,46 +2,42 @@
 
 Use for fresh chat. Canonical sources in repo — reference by path, don't duplicate.
 
-## Product state (2026-06-01)
+## Product state (2026-06-02)
 
-- **PRD:** v1.6.0 — demo-ready, all phases shipped. [docs/prd/PRD.md](prd/PRD.md)
-- **Architect sign-off:** PRD header block — MD export, question bank, refining mode approved vs v1.5.0
-- **Epic #1:** closed, Done on [BeerMe Kanban](https://github.com/users/james-p-ai/projects/2)
-- **Phase tickets:** #2–#23 closed. No open v1.6.0 scope work
-- **Latest commits:** `2c1e78a` Kanban doc, `571754a` architect sign-off, `6664a3e` Phase 4 polish
+- **PRD:** v1.7.0 — PDF export shipped; agent doctrine pilot complete. [docs/prd/PRD.md](prd/PRD.md)
+- **Architect sign-off:** PRD header block — PDF export approved vs v1.6.0
+- **Phase 5:** `phase-5-pdf-export` closed — see [handoff](phases/phase-5-pdf-export/handoff-to-acr.md)
+- **Agent doctrine:** PR [#86](https://github.com/james-p-ai/beerme/pull/86) — merge to `main` when ready
+- **Branch:** `feat/phase-5-pdf-export-sop-pilot` — code + SOP pilot
 
-## Phase 4 shipped
+## Phase 5 shipped
 
-1. **Question bank** — axis Qs from `QUESTION_BANK` in `app/prompts.py`; banked answers → profile without LLM. Ollama = extract fallback + optional blurbs only
-2. **Refining mode** — "Ask more questions" re-opens axes below confidence threshold (`refining` session flag)
-3. **MD export** — `app/export_md.py`, download button on results
-4. **Demo ergonomics** — `./run.sh`, expanded `scripts/qa/beerme-smoke.sh`, `model_available()` in ollama client
-5. **QA fix** — ask-more no longer bounce straight to results
+1. **`collect_beer_leaves`** — public helper in recommender for export/blurb batching
+2. **Printable blurb** — `BLURB_MAX_CHARS` in prompts
+3. **PDF export** — `app/export_pdf.py` + download button (fpdf2)
+4. **SOP canonical** — `docs/sop/ai-driven-development-sop.md` + agent pilot runbook
+5. **Smoke** — PDF step + offline export import check
 
 ## Remaining human gate
 
-Manual smoke (not pytest):
-
 ```bash
+pip install -r requirements.txt
 ollama pull llama3.2:3b
 ./run.sh
 bash scripts/qa/beerme-smoke.sh
 ```
 
-Pass smoke → done for v1.6.0 scope.
-
-## Out of scope (need new PRD)
-
-PDF export, live beer APIs, accounts, cloud deploy.
+Also: interactive Cursor routing smoke per `docs/sop/verification-addendum.md`.
 
 ## Key paths
 
 | Artifact | Path |
 |----------|------|
 | PRD | `docs/prd/PRD.md` |
-| Domain glossary | `CONTEXT.md` |
-| Phase 4 handoff | `docs/phases/phase-4-polish/handoff-to-acr.md` |
-| Kanban guide | `docs/github/KANBAN.md` |
+| Canonical SOP | `docs/sop/ai-driven-development-sop.md` |
+| Agent pilot | `docs/sop/agent-doctrine-pilot.md` |
+| Phase 5 handoff | `docs/phases/phase-5-pdf-export/handoff-to-acr.md` |
+| Cursor usage | `docs/cursor-teams/CURSOR_USAGE_GUIDE.md` |
 | Smoke script | `scripts/qa/beerme-smoke.sh` |
 
 ## Tests
@@ -50,21 +46,20 @@ PDF export, live beer APIs, accounts, cloud deploy.
 PYTHONPATH=. pytest -q
 ```
 
-21 tests passing at Phase 4 close.
+26 tests after Phase 5 close.
 
 ## Suggested skills for next session
 
 | Task | Skill |
 |------|-------|
+| Merge doctrine PR | human + `create-pr` |
+| Interactive routing smoke | `/verify` readonly |
 | New product scope | `to-prd` |
 | Break plan into tickets | `to-issues` |
-| Implement ticket | `tdd` |
-| Interactive bug filing | `qa` |
-| Session summary | `handoff` |
-| Compress this file | `caveman-compress` |
+| Implement ticket | `tdd` + domain subagent |
 
 ## Likely next work
 
-- Run smoke, file bugs if any (`qa`)
-- New PRD + Phase 5 kickoff for PDF etc (`to-prd`, `to-issues`)
-- Maintenance until new PRD
+- Merge PR #86 (agent doctrine) and Phase 5 pilot PR
+- Run full smoke HITL
+- Copy agent pilot pattern to next greenfield repo

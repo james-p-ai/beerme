@@ -1,5 +1,7 @@
 # PRD to Ticket to Handoff Cycle SOP
 
+> **Parent document:** [AI-Driven Development SOP](ai-driven-development-sop.md) — canonical seven-phase pipeline (Idea → Research → Prototype → PRD → Kanban → Execution → QA). This file is the **PRD-cycle addendum**: versioning, kickoff, tickets, handoff, and ACR within Phases 4–7.
+
 ## Purpose
 
 This SOP defines the standard process for moving product work from a PRD into phase-based tickets, completing those tickets in Cursor, producing a handoff for ACR, and feeding the results back into the PRD for the next phase. The goal is to keep Rich’s PRD as the living source of product intent while giving engineers a repeatable process for planning, execution, review, and documentation.

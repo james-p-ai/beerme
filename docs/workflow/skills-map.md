@@ -11,17 +11,17 @@ Per-repo bridge: `docs/agents/*` (from **`setup-practical-ai-skills`**). Externa
 
 ## By pipeline phase
 
-| Phase | Goal | Skills | Invoke |
-|-------|------|--------|--------|
-| **Setup** | Machine + repo config | `setup-practical-ai-skills`, `setup-pre-commit` | Manual `/setup-…` |
-| **1 Idea** | Name opportunity | `grill-with-docs`, `zoom-out` | Auto; `/zoom-out` manual |
-| **2 Research** | Resolve unknowns | `zoom-out`, `diagnose`, explore | Manual where noted |
-| **3 Prototype** | Validate taste | `prototype`, `design-an-interface` | Auto or `/prototype` |
-| **4 PRD** | Lock intent | `to-prd`, `grill-with-docs`, `ubiquitous-language` | Auto; `/ubiquitous-language` manual |
-| **5 Kanban** | Vertical slices on board | `to-issues`, `triage`, `request-refactor-plan` | Auto |
-| **6 Execution** | Implement tickets | `tdd`, `diagnose`, `review`, `task-handoff`, `handoff`, `create-pr`, `security-secrets-check` | Mix — see below |
-| **7 QA** | Human verify → new issues | `qa`, `release-readiness` | `/qa` auto; gates manual |
-| **Post-cycle** | ACR, PRD bump | `handoff`, `task-handoff`, `improve-codebase-architecture` | Manual |
+| Phase | Goal | Skills | Subagent (BeerMe) | Invoke |
+|-------|------|--------|-------------------|--------|
+| **Setup** | Machine + repo config | `setup-practical-ai-skills`, `setup-pre-commit` | — | Manual `/setup-…` |
+| **1 Idea** | Name opportunity | `grill-with-docs`, `zoom-out` | — | Auto; `/zoom-out` manual |
+| **2 Research** | Resolve unknowns | `zoom-out`, `diagnose`, explore | domain if defined | Manual where noted |
+| **3 Prototype** | Validate taste | `prototype`, `design-an-interface` | `/voyager` or `/orion` | Auto or `/prototype` |
+| **4 PRD** | Lock intent | `to-prd`, `grill-with-docs`, `ubiquitous-language` | — | Auto; `/ubiquitous-language` manual |
+| **5 Kanban** | Vertical slices on board | `to-issues`, `triage`, `request-refactor-plan` | — | Auto |
+| **6 Execution** | Implement tickets | `tdd`, `diagnose`, `review`, `task-handoff`, `handoff`, `create-pr`, `security-secrets-check` | `/orion`, `/engine`, `/voyager` | Mix — see below |
+| **7 QA** | Human verify → new issues | `qa`, `release-readiness` | `/verify` (readonly) | `/qa` auto; gates manual |
+| **Post-cycle** | ACR, PRD bump | `handoff`, `task-handoff`, `improve-codebase-architecture` | — | Manual |
 
 ## BeerMe execution loop
 
