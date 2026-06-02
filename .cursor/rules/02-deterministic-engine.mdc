@@ -1,0 +1,21 @@
+---
+description: BeerMe deterministic engine — taste profile, recommender, catalog data.
+globs:
+  - app/taste_profile.py
+  - app/recommender.py
+  - data/**
+  - tests/test_confidence.py
+  - tests/test_recommender.py
+alwaysApply: false
+---
+
+# Deterministic engine boundary
+
+When editing these files:
+
+- **Session confidence is computed in Python** — never in LLM prompts or UI.
+- Recommender outputs must reference **only** rows in `data/beers.json` and `data/style_tree.json`.
+- Pure functions get pytest coverage; mock Ollama at integration boundaries only.
+- Do not add Streamlit or HTTP client code here.
+
+Use `/engine` subagent for multi-file engine tickets. Implement with **`tdd`**.

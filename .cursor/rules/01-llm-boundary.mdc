@@ -1,0 +1,19 @@
+---
+description: BeerMe LLM boundary — prompts and Ollama client only.
+globs:
+  - app/ollama_client.py
+  - app/prompts.py
+  - tests/test_ollama_client.py
+alwaysApply: false
+---
+
+# LLM boundary (Orion)
+
+When editing these files:
+
+- Return structured JSON to callers; keep scoring and catalog logic out of prompts.
+- Unit tests use fixtures — no live Ollama required for parse/retry tests.
+- Do not invent beer names or style IDs in outputs consumed by the recommender.
+- Retry malformed JSON once; surface failures to the UI layer.
+
+If the ticket also changes confidence or catalog behavior, stop and split — Engine owns that logic.

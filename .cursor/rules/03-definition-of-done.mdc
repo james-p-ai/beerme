@@ -1,0 +1,36 @@
+---
+description: BeerMe definition of done for tickets and phase slices.
+alwaysApply: false
+globs:
+  - app/**
+  - tests/**
+  - scripts/**
+---
+
+# Definition of Done (BeerMe)
+
+A ticket is **not Done** until:
+
+## All changes
+
+- [ ] Scoped to linked GitHub issue `#`; no scope creep
+- [ ] Owning zone respected (Orion / Engine / Voyager) or handoff noted
+- [ ] `PYTHONPATH=. pytest -q` green for touched areas
+- [ ] `/security-secrets-check` clean on diff
+- [ ] PR references issue; merged → issue on board **Done**
+
+## Engine / catalog
+
+- [ ] No invented beers in recommender output
+- [ ] Confidence logic remains in `taste_profile.py`, not LLM or UI
+
+## LLM
+
+- [ ] Parse/retry tested with fixtures where applicable
+- [ ] No live Ollama required for unit tests of engine logic
+
+## Phase close (Phase 7)
+
+- [ ] `bash scripts/qa/beerme-smoke.sh` HITL issue Done
+- [ ] `/release-readiness` checklist in `docs/cursor-teams/RELEASE_GATES.md`
+- [ ] PRD version/changelog updated if phase scope changed
